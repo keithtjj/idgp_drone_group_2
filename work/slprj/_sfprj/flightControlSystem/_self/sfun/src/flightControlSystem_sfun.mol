@@ -1,12 +1,12 @@
 flightControlSystem_sfun.obj
-c1_flightControlSystem.obj
+c4_flightControlSystem.obj
+c9_flightControlSystem.obj
 flightControlSystem_sfun_registry.obj
 half_type.obj
 
 
-"C:\Program Files\MATLAB\R2024b\extern\lib\win64\mingw64\libmwgrayto8.lib" 
 "-LC:\Program Files\MATLAB\R2024b\extern\lib\win64\mingw64" "-llibmwippfilter" 
-"C:\Program Files\MATLAB\R2024b\extern\lib\win64\mingw64\libmwgetnumcores.lib" 
+"C:\Program Files\MATLAB\R2024b\extern\lib\win64\mingw64\libmwrgb2hsv_tbb.lib" 
 "C:\Program Files\MATLAB\R2024b\extern\lib\win64\mingw64\libmwimfilter.lib" 
 "C:\Program Files\MATLAB\R2024b\extern\lib\win64\mingw64\libmwimregionalmax.lib" 
 "C:\Program Files\MATLAB\R2024b\extern\lib\win64\mingw64\libmwordfilt2.lib" 

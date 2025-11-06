@@ -30,13 +30,12 @@
 #define rtIsInf(X)                     ((int)mxIsInf(X))
 
 /* Auxiliary Header Files */
-#include "libmwgetnumcores.h"
-#include "libmwgrayto8.h"
 #include "libmwimfilter.h"
 #include "libmwimregionalmax.h"
 #include "libmwippfilter.h"
 #include "libmwippreconstruct.h"
 #include "libmwordfilt2.h"
+#include "libmwrgb2hsv_tbb.h"
 
 /* Forward Declarations */
 /* Type Definitions */
