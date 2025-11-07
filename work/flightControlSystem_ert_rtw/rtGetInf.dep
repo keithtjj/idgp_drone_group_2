@@ -1,0 +1,14 @@
+rtGetInf.o rtGetInf.o: \
+ C:/Users/keith/Documents/MATLAB/Projects/idgp_drone_group_2/work/flightControlSystem_ert_rtw/rtGetInf.c \
+ C:/Users/keith/Documents/MATLAB/Projects/idgp_drone_group_2/work/flightControlSystem_ert_rtw/rtwtypes.h \
+ C:/PROGRA~1/MATLAB/R2024b/extern/include/tmwtypes.h \
+ C:/Users/keith/Documents/MATLAB/Projects/idgp_drone_group_2/work/flightControlSystem_ert_rtw/rtGetInf.h \
+ C:/Users/keith/Documents/MATLAB/Projects/idgp_drone_group_2/work/flightControlSystem_ert_rtw/rt_nonfinite.h
+
+C:/Users/keith/Documents/MATLAB/Projects/idgp_drone_group_2/work/flightControlSystem_ert_rtw/rtwtypes.h:
+
+C:/PROGRA~1/MATLAB/R2024b/extern/include/tmwtypes.h:
+
+C:/Users/keith/Documents/MATLAB/Projects/idgp_drone_group_2/work/flightControlSystem_ert_rtw/rtGetInf.h:
+
+C:/Users/keith/Documents/MATLAB/Projects/idgp_drone_group_2/work/flightControlSystem_ert_rtw/rt_nonfinite.h:
