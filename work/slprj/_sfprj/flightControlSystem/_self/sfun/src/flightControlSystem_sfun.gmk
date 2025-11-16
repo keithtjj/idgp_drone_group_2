@@ -3,28 +3,28 @@
 # Modify the following macros to reflect the tools you wish to use for
 # compiling and linking your code.
 #
-CC = "D:\MatLab2024b\bin\win64\mex.exe" -R2018a
+CC = "C:\Program Files\MATLAB\R2024b\bin\win64\mex.exe" -R2018a
 LD = $(CC)
  
 MODEL     = flightControlSystem
 TARGET      = sfun
-MODULE_SRCS   = c4_flightControlSystem.c c9_flightControlSystem.c half_type.c
+MODULE_SRCS   = c1_flightControlSystem.c half_type.c
 MODEL_SRC  = flightControlSystem_sfun.c
 MODEL_REG = flightControlSystem_sfun_registry.c
 MAKEFILE    = flightControlSystem_sfun.gmk
-MATLAB_ROOT  = d:\matlab2024b\toolbox\stateflow\stateflow\..\..\..
+MATLAB_ROOT  = c:\program files\matlab\r2024b\toolbox\stateflow\stateflow\..\..\..
 BUILDARGS   = 
 #------------------------------ Include/Lib Path ------------------------------
  
-USER_INCLUDES = -I"C:\Users\Louis\Desktop\UoE\Fourth Year\Drone project\idgp_drone_group_2-Vision-v2" -I"C:\Users\Louis\Desktop\UoE\Fourth Year\Drone project\idgp_drone_group_2-Vision-v2\controller" 
+USER_INCLUDES = -I"C:\Users\keith\Documents\MATLAB\Projects\idgp_drone_group_2\work" -I"C:\Users\keith\Documents\MATLAB\Projects\idgp_drone_group_2\controller" 
 AUX_INCLUDES = 
 MLSLSF_INCLUDES  = \
-    -I"D:\MatLab2024b\extern\include" \
-    -I"D:\MatLab2024b\simulink\include" \
-    -I"D:\MatLab2024b\simulink\include\sf_runtime" \
-    -I"D:\MatLab2024b\stateflow\c\mex\include" \
-    -I"D:\MatLab2024b\rtw\c\src" \
-    -I"C:\Users\Louis\Desktop\UoE\Fourth Year\Drone project\idgp_drone_group_2-Vision-v2\work\slprj\_sfprj\flightControlSystem\_self\sfun\src" 
+    -I"C:\Program Files\MATLAB\R2024b\extern\include" \
+    -I"C:\Program Files\MATLAB\R2024b\simulink\include" \
+    -I"C:\Program Files\MATLAB\R2024b\simulink\include\sf_runtime" \
+    -I"C:\Program Files\MATLAB\R2024b\stateflow\c\mex\include" \
+    -I"C:\Program Files\MATLAB\R2024b\rtw\c\src" \
+    -I"C:\Users\keith\Documents\MATLAB\Projects\idgp_drone_group_2\work\slprj\_sfprj\flightControlSystem\_self\sfun\src" 
 
 THIRD_PARTY_INCLUDES = 
 

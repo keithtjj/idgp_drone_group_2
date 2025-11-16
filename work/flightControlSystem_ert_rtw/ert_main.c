@@ -1,9 +1,5 @@
 #include "flightControlSystem.h"
 #include "rtwtypes.h"
-#include <ext_work.h>
-#include <ext_svr.h>
-#include <ext_share.h>
-#include <updown.h>
 #include "rt_logging.h"
 #include "MW_target_hardware_resources.h"
 #ifndef SAVEFILE
@@ -74,8 +70,6 @@ void rt_OneStep(void)
     need2runFlags[1]--;
     isRateRunning[1]--;
   }
-
-  rtExtModeCheckEndTrigger();
 }
 
 #define UNUSED(x)                      x = x
@@ -93,45 +87,15 @@ int main(void)
   UNUSED(modelBaseRate);
   UNUSED(systemClock);
   rtmSetErrorStatus(flightControlSystem_M, 0);
-
-  /* initialize external mode */
-  rtParseArgsForExtMode(0, NULL);
   flightControlSystem_initialize();
   ;
-  ;
-
-  /* External mode */
-  rtSetTFinalForExtMode(&rtmGetTFinal(flightControlSystem_M));
-  rtExtModeCheckInit(2);
-
-  {
-    boolean_T rtmStopReq = false;
-    rtExtModeWaitForStartPkt(flightControlSystem_M->extModeInfo, 2, &rtmStopReq);
-    if (rtmStopReq) {
-      rtmSetStopRequested(flightControlSystem_M, true);
-    }
-  }
-
-  rtERTExtModeStartMsg();
-  ;
   runModel =
-    rtmGetErrorStatus(flightControlSystem_M) == (NULL)&& !rtmGetStopRequested
-    (flightControlSystem_M);
+    rtmGetErrorStatus(flightControlSystem_M) == (NULL);
   ;
   while (runModel) {
-    /* External mode */
-    {
-      boolean_T rtmStopReq = false;
-      rtExtModeOneStep(flightControlSystem_M->extModeInfo, 2, &rtmStopReq);
-      if (rtmStopReq) {
-        rtmSetStopRequested(flightControlSystem_M, true);
-      }
-    }
-
     rt_OneStep();
     stopRequested = !(
-                      rtmGetErrorStatus(flightControlSystem_M) == (NULL)&&
-                      !rtmGetStopRequested(flightControlSystem_M));
+                      rtmGetErrorStatus(flightControlSystem_M) == (NULL));
     runModel = !(stopRequested);
   }
 
@@ -139,9 +103,6 @@ int main(void)
 
   /* Terminate model */
   flightControlSystem_terminate();
-
-  /* External mode shutdown */
-  rtExtModeShutdown(2);
   ;
   return 0;
 }

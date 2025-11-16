@@ -7,9 +7,9 @@
  *
  * Code generation for model "flightControlSystem".
  *
- * Model version              : 9.25
+ * Model version              : 9.61
  * Simulink Coder version : 24.2 (R2024b) 21-Jun-2024
- * C source code generated on : Thu Nov  6 17:22:05 2025
+ * C source code generated on : Sun Nov 16 18:28:41 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

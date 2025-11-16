@@ -7,53 +7,11 @@
 %endfunction
 %function ChartDataMap(block, system) void
   %createrecord ChartDataElements {\
-    NumChartData   6 \
+    NumChartData   0 \
     ChartDataDefaults {\
       RecordType   "ChartData"\
       Dimensions   []\
       IsTestPoint  0\
-    }\
-    ChartData {\
-      Name         "sfEvent"\
-      Description  "ActiveChartEvent"\
-      SFName       ""\
-      Path         ""\
-      SrcLocation  ""\
-    }\
-    ChartData {\
-      Name         "doneDoubleBufferReInit"\
-      Description  "DoubleBufferInitCheck"\
-      SFName       ""\
-      Path         ""\
-      SrcLocation  ""\
-    }\
-    ChartData {\
-      Name         "prev_endless_x"\
-      Description  "EmlPersistent"\
-      SFName       ""\
-      Path         ""\
-      SrcLocation  "flightControlSystem:2742:125-139"\
-    }\
-    ChartData {\
-      Name         "prev_endless_x_not_empty"\
-      Description  "EmlPersistentSentinel"\
-      SFName       ""\
-      Path         ""\
-      SrcLocation  "flightControlSystem:2742:125-139"\
-    }\
-    ChartData {\
-      Name         "prev_endless_y"\
-      Description  "EmlPersistent"\
-      SFName       ""\
-      Path         ""\
-      SrcLocation  "flightControlSystem:2742:152-166"\
-    }\
-    ChartData {\
-      Name         "prev_endless_y_not_empty"\
-      Description  "EmlPersistentSentinel"\
-      SFName       ""\
-      Path         ""\
-      SrcLocation  "flightControlSystem:2742:152-166"\
     }\
   }
   %return ChartDataElements

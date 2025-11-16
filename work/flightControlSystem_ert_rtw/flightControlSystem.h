@@ -7,9 +7,9 @@
  *
  * Code generation for model "flightControlSystem".
  *
- * Model version              : 9.25
+ * Model version              : 9.61
  * Simulink Coder version : 24.2 (R2024b) 21-Jun-2024
- * C source code generated on : Thu Nov  6 17:22:05 2025
+ * C source code generated on : Sun Nov 16 18:28:41 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -24,13 +24,10 @@
 #define flightControlSystem_COMMON_INCLUDES_
 #include <stdlib.h>
 #include "rtwtypes.h"
-#include "rtw_extmode.h"
-#include "sysran_types.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 #include "rt_logging.h"
-#include "dt_info.h"
-#include "ext_work.h"
+#include "grabberCannon.h"
 #include "rsedu_image.h"
 #endif                                /* flightControlSystem_COMMON_INCLUDES_ */
 
@@ -47,10 +44,6 @@
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetFinalTime
 #define rtmGetFinalTime(rtm)           ((rtm)->Timing.tFinal)
-#endif
-
-#ifndef rtmGetRTWExtModeInfo
-#define rtmGetRTWExtModeInfo(rtm)      ((rtm)->extModeInfo)
 #endif
 
 #ifndef rtmGetRTWLogInfo
@@ -97,17 +90,6 @@
 #define rtmTaskCounter(rtm, idx)       ((rtm)->Timing.TaskCounters.TID[(idx)])
 #endif
 
-/* Block states (default storage) for system '<S4>/Geofencing error' */
-typedef struct {
-  int8_T Geofencingerror_SubsysRanBC;  /* '<S4>/Geofencing error' */
-} DW_Geofencingerror_flightControlSystem_T;
-
-/* Block states (default storage) for system '<S370>/SqrtUsedFcn' */
-typedef struct {
-  int32_T sfEvent;                     /* '<S370>/SqrtUsedFcn' */
-  boolean_T doneDoubleBufferReInit;    /* '<S370>/SqrtUsedFcn' */
-} DW_SqrtUsedFcn_flightControlSystem_T;
-
 /* Block signals for system '<S341>/MeasurementUpdate' */
 typedef struct {
   real32_T Product3[2];                /* '<S372>/Product3' */
@@ -115,7 +97,6 @@ typedef struct {
 
 /* Block states (default storage) for system '<S341>/MeasurementUpdate' */
 typedef struct {
-  int8_T MeasurementUpdate_SubsysRanBC;/* '<S341>/MeasurementUpdate' */
   boolean_T MeasurementUpdate_MODE;    /* '<S341>/MeasurementUpdate' */
 } DW_MeasurementUpdate_flightControlSystem_T;
 
@@ -126,75 +107,78 @@ typedef struct {
 
 /* Block states (default storage) for system '<S348>/Enabled Subsystem' */
 typedef struct {
-  int8_T EnabledSubsystem_SubsysRanBC; /* '<S348>/Enabled Subsystem' */
   boolean_T EnabledSubsystem_MODE;     /* '<S348>/Enabled Subsystem' */
 } DW_EnabledSubsystem_flightControlSystem_T;
 
 /* Block signals for system '<Root>/Control System' */
 typedef struct {
+  real32_T TmpSignalConversionAtToWorkspaceInport1[12];/* '<S1>/State Estimator' */
   real32_T VectorConcatenate[9];       /* '<S518>/Vector Concatenate' */
-  real32_T DataTypeConversion_m[8];    /* '<S253>/Data Type Conversion' */
+  real32_T MathFunction[9];            /* '<S251>/Math Function' */
+  real32_T Reshape9to3x3columnmajor[9];
+                                /* '<S447>/Reshape (9) to [3x3] column-major' */
+  real32_T DataTypeConversion_g[8];    /* '<S253>/Data Type Conversion' */
+  real_T Sum[3];                       /* '<S251>/Sum' */
+  real_T rtb_VectorConcatenate_m[3];
   real_T rtb_VectorConcatenate_c[3];
   real32_T Sum1_p[6];                  /* '<S253>/Sum1' */
-  real32_T Reshapexhat[4];             /* '<S441>/Reshapexhat' */
-  real32_T Conversion_a[4];            /* '<S367>/Conversion' */
+  real32_T Product2_k[4];              /* '<S512>/Product2' */
+  real32_T Product3_a[4];              /* '<S510>/Product3' */
+  real32_T Add_o[4];                   /* '<S486>/Add' */
   real32_T fv[4];
-  real32_T FIR_IMUaccel[3];            /* '<S253>/FIR_IMUaccel' */
-  real32_T u_l[3];                     /* '<S442>/ ' */
-  real_T invertzaxisGain;              /* '<S251>/invertzaxisGain' */
-  real_T speed;                        /* '<S5>/speed' */
-  real_T Sum[3];                       /* '<S251>/Sum' */
+  real32_T fv1[4];
   real_T Product2[2];                  /* '<S309>/Product2' */
   real_T Product3[2];                  /* '<S307>/Product3' */
+  real32_T FIR_IMUaccel[3];            /* '<S253>/FIR_IMUaccel' */
+  real32_T DataTypeConversion3[3];     /* '<S252>/Data Type Conversion3' */
+  real32_T u_l[3];                     /* '<S442>/ ' */
+  real32_T sincos_o1_b[3];             /* '<S444>/sincos' */
+  real32_T DataTypeConversion_b[3];    /* '<S5>/Data Type Conversion' */
+  real_T invertzaxisGain;              /* '<S251>/invertzaxisGain' */
   real_T z;                            /* '<S5>/Chart' */
   real_T x;                            /* '<S5>/Chart' */
   real_T y;                            /* '<S5>/Chart' */
-  real_T sonarFilter_IIR_tmp;
-  real_T Sum_k;                        /* '<S307>/Sum' */
-  real_T rtb_Add_a_idx_1;
-  real_T unnamed_idx_1;
-  real32_T SimplyIntegrateVelocity[2]; /* '<S437>/SimplyIntegrateVelocity' */
-  real32_T Conversion_g[2];            /* '<S365>/Conversion' */
-  real32_T DataTypeConversion_o[2];    /* '<S439>/Data Type Conversion' */
-  real32_T Saturation_n[2];            /* '<S114>/Saturation' */
-  real32_T fv1[2];
-  real32_T DataTypeConversion;         /* '<S251>/Data Type Conversion' */
+  real_T motor_gain;                   /* '<S5>/Chart' */
   real32_T inverseIMU_gain[6];         /* '<S253>/inverseIMU_gain' */
+  real_T sonarFilter_IIR_tmp;
+  real_T u_h;                          /* '<S4>/   ' */
+  real_T rtb_Add_a_idx_1;
+  real_T rtb_VectorConcatenate_tmp;
+  real_T unnamed_idx_1_tmp;
+  real32_T Conversion_g[2];            /* '<S365>/Conversion' */
+  real32_T Conversion_i[2];            /* '<S419>/Conversion' */
+  real32_T Add_k[2];                   /* '<S440>/Add' */
+  real32_T DeadZone_k[2];              /* '<S99>/DeadZone' */
+  real32_T Saturation[2];              /* '<S223>/Saturation' */
+  real32_T LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontr[2];
+  /* '<S10>/LPF 8Hz Cutoff Filter to avoid oscillations  induced by position controller' */
+  real32_T Akxhatkk1_o[2];             /* '<S341>/A[k]*xhat[k|k-1]' */
   real32_T TrigonometricFunction1;     /* '<S317>/Trigonometric Function1' */
   real32_T TrigonometricFunction;      /* '<S318>/Trigonometric Function' */
-  real32_T DataTypeConversion3[3];     /* '<S252>/Data Type Conversion3' */
   real32_T p;                          /* '<S253>/LPF Fcutoff = 40Hz1' */
   real32_T q;                          /* '<S253>/LPF Fcutoff = 40Hz' */
-  real32_T Subtract[3];                /* '<S252>/Subtract' */
   real32_T angularvelocitycompensation[2];
                                     /* '<S436>/angular velocity compensation' */
-  real32_T DataTypeConversion2;        /* '<S251>/Data Type Conversion2' */
-  real32_T TmpSignalConversionAtToWorkspaceInport1[12];/* '<S1>/State Estimator' */
   real32_T Product[2];                 /* '<S438>/Product' */
-  real32_T Product2_k[4];              /* '<S512>/Product2' */
-  real32_T Product3_a[4];              /* '<S510>/Product3' */
+  real32_T Switch[4];                  /* '<S12>/Switch' */
   real32_T In1;                        /* '<S433>/In1' */
   real32_T numAccum;
   real32_T DiscreteTimeIntegrator_k5;  /* '<S319>/Discrete-Time Integrator' */
-  real32_T Abs2;                       /* '<S4>/Abs2' */
-  real32_T Abs1;                       /* '<S4>/Abs1' */
+  real32_T Add_i;                      /* '<S9>/Add' */
+  real32_T SaturationThrust1;          /* '<S7>/SaturationThrust1' */
+  real32_T Subtract;                   /* '<S429>/Subtract' */
   real32_T Gain_m;                     /* '<S442>/Gain' */
-  real32_T Subtract_c;                 /* '<S429>/Subtract' */
-  real32_T I_yaw;                      /* '<S11>/I_yaw' */
-  real32_T Abs3;                       /* '<S4>/Abs3' */
-  real32_T Abs4;                       /* '<S4>/Abs4' */
-  real32_T Abs5;                       /* '<S4>/Abs5' */
+  real32_T Abs;                        /* '<S4>/Abs  ' */
   real32_T LPFFcutoff40Hz_tmp;
   real32_T IIR_IMUgyro_r_tmp;
-  real32_T rtb_sincos_o2_j_idx_0;
-  real32_T rtb_sincos_o2_j_idx_1;
-  real32_T rtb_sincos_o2_j_idx_2;
-  real32_T rtb_sincos_o2_idx_0;
-  real32_T rtb_sincos_o2_idx_1;
+  real32_T rtb_Subtract_p_idx_2;
+  real32_T rtb_Subtract_p_idx_0;
+  real32_T rtb_Subtract_p_idx_1;
   int32_T j;
   int32_T memOffset;
   int32_T i;
   int16_T LogicalOperator;             /* '<S252>/Logical Operator' */
+  uint8_T Merge;                       /* '<S4>/Merge' */
   boolean_T Compare;                   /* '<S258>/Compare' */
   boolean_T nicemeasurementornewupdateneeded;
                                 /* '<S256>/nicemeasurementor newupdateneeded' */
@@ -218,8 +202,8 @@ typedef struct {
   real32_T SimplyIntegrateVelocity_DSTATE[2];/* '<S437>/SimplyIntegrateVelocity' */
   real32_T pressureFilter_IIR_states[3];/* '<S256>/pressureFilter_IIR' */
   real32_T DiscreteTimeIntegrator_DSTATE;/* '<S319>/Discrete-Time Integrator' */
-  real32_T FIR_IMUaccel_states[15];    /* '<S253>/FIR_IMUaccel' */
   real32_T MemoryX_DSTATE_g[2];        /* '<S321>/MemoryX' */
+  real32_T FIR_IMUaccel_states[15];    /* '<S253>/FIR_IMUaccel' */
   real32_T MemoryX_DSTATE_m[2];        /* '<S375>/MemoryX' */
   real32_T LPFFcutoff40Hz1_states;     /* '<S253>/LPF Fcutoff = 40Hz1' */
   real32_T LPFFcutoff40Hz_states;      /* '<S253>/LPF Fcutoff = 40Hz' */
@@ -229,62 +213,42 @@ typedef struct {
   real32_T UD_DSTATE[2];               /* '<S448>/UD' */
   real32_T Delay_DSTATE[2];            /* '<S436>/Delay' */
   real32_T Delay1_DSTATE[2];           /* '<S6>/Delay1' */
-  real32_T DiscreteTimeIntegrator_DSTATE_c;/* '<S7>/Discrete-Time Integrator' */
   real32_T Integrator_DSTATE[2];       /* '<S216>/Integrator' */
   real32_T LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrolle[2];
   /* '<S10>/LPF 8Hz Cutoff Filter to avoid oscillations  induced by position controller' */
   real32_T Integrator_DSTATE_d[2];     /* '<S107>/Integrator' */
   real32_T Filter_DSTATE[2];           /* '<S102>/Filter' */
+  real32_T DiscreteTimeIntegrator_DSTATE_c;/* '<S7>/Discrete-Time Integrator' */
   real32_T DiscreteTimeIntegrator_DSTATE_d;/* '<S11>/Discrete-Time Integrator' */
   int32_T FIR_IMUaccel_circBuf;        /* '<S253>/FIR_IMUaccel' */
-  uint32_T Output_DSTATE;              /* '<S514>/Output' */
-  uint32_T Output_DSTATE_i;            /* '<S432>/Output' */
+  uint32_T Output_DSTATE;              /* '<S432>/Output' */
+  uint32_T Output_DSTATE_n;            /* '<S514>/Output' */
   uint32_T Output_DSTATE_g;            /* '<S242>/Output' */
   real32_T FIR_IMUaccel_simContextBuf[30];/* '<S253>/FIR_IMUaccel' */
   real32_T FIR_IMUaccel_simRevCoeff[6];/* '<S253>/FIR_IMUaccel' */
   real32_T IIRgyroz_tmp[2];            /* '<S440>/IIRgyroz' */
   real32_T LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrol_j[2];
   /* '<S10>/LPF 8Hz Cutoff Filter to avoid oscillations  induced by position controller' */
-  int32_T sfEvent;                     /* '<S508>/SqrtUsedFcn' */
-  int32_T sfEvent_n;                   /* '<S305>/SqrtUsedFcn' */
-  int32_T sfEvent_j;                   /* '<S5>/Chart' */
-  int32_T sfEvent_p;
-               /* '<S10>/Position error transformation (Earth to Body frame)' */
-  uint32_T is_c3_flightControlSystem;  /* '<S5>/Chart' */
+  parrot_Grabber_flightControlSystem_T obj;/* '<S5>/Grabber' */
   uint16_T Output_DSTATE_a;            /* '<S14>/Output' */
   uint16_T temporalCounter_i1;         /* '<S5>/Chart' */
   int8_T SimplyIntegrateVelocity_PrevResetState;/* '<S437>/SimplyIntegrateVelocity' */
   int8_T DiscreteTimeIntegrator_PrevResetState;/* '<S7>/Discrete-Time Integrator' */
-  int8_T EnabledSubsystem_SubsysRanBC; /* '<S486>/Enabled Subsystem' */
-  int8_T MeasurementUpdate_SubsysRanBC;/* '<S479>/MeasurementUpdate' */
-  int8_T TriggeredSubsystem_SubsysRanBC;/* '<S429>/Triggered Subsystem' */
-  int8_T EnabledSubsystem_SubsysRanBC_c;/* '<S283>/Enabled Subsystem' */
-  int8_T MeasurementUpdate_SubsysRanBC_m;/* '<S277>/MeasurementUpdate' */
   uint8_T is_active_c3_flightControlSystem;/* '<S5>/Chart' */
+  uint8_T is_c3_flightControlSystem;   /* '<S5>/Chart' */
   boolean_T icLoad;                    /* '<S255>/MemoryX' */
   boolean_T icLoad_p;                  /* '<S321>/MemoryX' */
   boolean_T icLoad_k;                  /* '<S375>/MemoryX' */
   boolean_T icLoad_o;                  /* '<S441>/MemoryX' */
-  boolean_T doneDoubleBufferReInit;    /* '<S508>/SqrtUsedFcn' */
-  boolean_T doneDoubleBufferReInit_i;  /* '<S305>/SqrtUsedFcn' */
-  boolean_T doneDoubleBufferReInit_j;
-               /* '<S10>/Position error transformation (Earth to Body frame)' */
+  boolean_T objisempty;                /* '<S5>/Grabber' */
   boolean_T EnabledSubsystem_MODE;     /* '<S486>/Enabled Subsystem' */
   boolean_T MeasurementUpdate_MODE;    /* '<S479>/MeasurementUpdate' */
-  boolean_T EnabledSubsystem_MODE_l;   /* '<S283>/Enabled Subsystem' */
-  boolean_T MeasurementUpdate_MODE_c;  /* '<S277>/MeasurementUpdate' */
+  boolean_T EnabledSubsystem_MODE_i;   /* '<S283>/Enabled Subsystem' */
+  boolean_T MeasurementUpdate_MODE_h;  /* '<S277>/MeasurementUpdate' */
   DW_EnabledSubsystem_flightControlSystem_T EnabledSubsystem_n;/* '<S402>/Enabled Subsystem' */
   DW_MeasurementUpdate_flightControlSystem_T MeasurementUpdate_j;/* '<S395>/MeasurementUpdate' */
-  DW_SqrtUsedFcn_flightControlSystem_T sf_SqrtUsedFcn_e;/* '<S424>/SqrtUsedFcn' */
   DW_EnabledSubsystem_flightControlSystem_T EnabledSubsystem_d;/* '<S348>/Enabled Subsystem' */
   DW_MeasurementUpdate_flightControlSystem_T MeasurementUpdate_n;/* '<S341>/MeasurementUpdate' */
-  DW_SqrtUsedFcn_flightControlSystem_T sf_SqrtUsedFcn_h;/* '<S370>/SqrtUsedFcn' */
-  DW_Geofencingerror_flightControlSystem_T Normalcondition;/* '<S4>/Normal condition' */
-  DW_Geofencingerror_flightControlSystem_T Ultrasoundimproper;/* '<S4>/Ultrasound improper' */
-  DW_Geofencingerror_flightControlSystem_T Noopticalflow;/* '<S4>/No optical flow ' */
-  DW_Geofencingerror_flightControlSystem_T estimatorOpticalflowerror;
-                                      /* '<S4>/estimator//Optical flow error' */
-  DW_Geofencingerror_flightControlSystem_T Geofencingerror;/* '<S4>/Geofencing error' */
 } DW_ControlSystem_flightControlSystem_T;
 
 /* Zero-crossing (trigger) state for system '<Root>/Control System' */
@@ -295,262 +259,40 @@ typedef struct {
 /* Block signals (default storage) */
 typedef struct {
   real_T Xin[57600];
-  creal_T accumMatrix[19200];
-  creal_T out[19200];
-  creal_T accumMatrix_tmp[19200];
-  real_T a[20336];
-  real_T inImg[20336];
-  real_T aTmp[19764];
-  real_T aTmp_m[19764];
-  int32_T locationStack[38400];
-  real_T bTmp[19200];
-  real_T dv[19200];
-  real_T dv1[19200];
-  real_T accumMatrixRe[19200];
-  real_T Hd[19200];
-  real_T Hd_c[19200];
-  real32_T aTmp_k[20336];
-  real32_T aTmp_c[19764];
-  real32_T aTmp_b[19764];
-  real32_T gradientImg[19200];
-  real32_T Gy[19200];
-  real32_T b_I[19200];
-  real32_T varargin_1[19200];
   uint8_T u[57600];
-  boolean_T rows_to_keep_data[19200];
-  boolean_T bw[19200];
-  boolean_T bwpre[19200];
-  real_T b_xwork[256];
-  int32_T b_iwork[256];
-  creal_T Opca[31];
-  s_R6Og1x0kmqQXSF9Pwa49FD_flightControlSystem_T a_p;
-  real_T inImg_c[25];
-  boolean_T out_[120];
-  real_T J_data[9];
-  int32_T c[18];
-  int32_T imnhSubs[18];
-  int32_T a_f[18];
-  int32_T d[18];
-  int32_T imnhSubs_g[18];
-  real_T RateTransition[5];            /* '<Root>/Rate Transition' */
-  int32_T b[9];
-  int32_T imnhInds[9];
-  int32_T b_imnhInds_data[9];
-  int32_T c_g[9];
-  int32_T imnhInds_[9];
-  real_T x4[4];
-  int32_T idx4[4];
-  int32_T perm[4];
-  real_T mx_endless_x[2];
-  real_T mx_endless_y[2];
-  real_T mx_t[2];
-  real_T wc[2];
-  sOA5t73y81YtFHGIDxk0fKF_flightControlSystem_T s;
-  boolean_T isInside[9];
-  int8_T tmp_data[9];
-  int8_T tmp_data_m[9];
-  int8_T tmp_data_n[9];
-  int8_T tmp_data_p[9];
-  boolean_T bv[9];
-  boolean_T isInside_l[9];
-  int8_T tmp_data_j[9];
-  int8_T b_tmp_data[9];
-  int8_T tmp_data_d[9];
-  real_T offset_x;                     /* '<S2>/MATLAB Function' */
-  uint8_T R[19200];                    /* '<S2>/PARROT Image Conversion' */
-  uint8_T G[19200];                    /* '<S2>/PARROT Image Conversion' */
-  uint8_T B[19200];                    /* '<S2>/PARROT Image Conversion' */
-  boolean_T BW[19200];                 /* '<S525>/MATLAB Function' */
+  int32_T b_i_data[9600];
+  boolean_T BW_b[19200];               /* '<S2>/Image Preprocessing' */
+  boolean_T BW[19200];                 /* '<S2>/Dilation' */
+  uint8_T uv[19200];
+  uint8_T uv1[19200];
+  uint8_T uv2[19200];
+  real_T DrawShapes[1444];             /* '<S2>/Draw Shapes' */
+  uint8_T b_j_data[9600];
+  boolean_T x[9600];
+  boolean_T b_x[1444];
+  real_T RateTransition[6];            /* '<Root>/Rate Transition' */
+  real_T h;
+  real_T s;
   real_T delta;
   real_T tmp;
-  real_T way_y;
-  real_T iter_y;
-  real_T m;
-  real_T slope_error;
-  real_T y;
-  real_T range;
-  real_T xi;
-  real_T ex_data;
-  real_T way_x_n;
-  real_T way_y_d;
-  real_T accumMatrixRe_d;
-  real_T d_l;
-  real_T d1;
-  real_T br;
-  real_T Opca_re;
-  real_T Opca_im;
-  real_T bij;
-  real_T CC_NumObjects;
-  real_T sumIntensity;
-  real_T y_o;
-  real_T bsum;
-  real_T fparamsAugmented_pixel;
-  real_T d2;
-  real_T q;
-  real_T u0;
-  real_T b_I_b;
-  real_T x;
-  int32_T d_g[2];
-  int32_T e[2];
-  int32_T iv[2];
-  int32_T pixelSub[2];
-  int32_T e_l[2];
-  int32_T f[2];
-  int32_T pixelSub_d[2];
-  real32_T Gmax;
-  real32_T t;
-  real32_T xc_tmp;
-  int32_T W;
-  int32_T swapepd;
-  int32_T xk;
-  int32_T yk;
-  int32_T b_x;
-  int32_T x1;
-  int32_T b_y1;
-  int32_T iindx_data;
-  int32_T c_idx;
-  int32_T k;
-  int32_T nrows;
-  int32_T b_j;
-  int32_T b_i;
-  int32_T g_i;
-  int32_T inImg_tmp;
-  int32_T k_n;
-  int32_T nLastBlock;
-  int32_T n;
-  int32_T ib;
-  int32_T quartetOffset;
-  int32_T b_k;
-  int32_T i2;
-  int32_T i3;
-  int32_T i4;
-  int32_T bLen2;
-  int32_T p;
-  int32_T q_b;
-  int32_T offset1;
-  int32_T d_ln;
-  int32_T loop_ub;
-  int32_T idx_tmp;
-  int32_T bLen;
-  int32_T tailOffset;
-  int32_T nTail;
-  int32_T nPairs;
-  int32_T p_h;
-  int32_T q_bn;
-  int32_T iout;
-  int32_T offset1_d;
-  int32_T idxkeep;
-  int32_T d_e;
-  int32_T c_idx_b;
-  int32_T b_k_j;
-  int32_T loop_ub_f;
-  int32_T Ex_chunk_tmp;
-  int32_T c_size_idx_1;
-  int32_T j;
+  real_T dist;
   int32_T i;
-  int32_T cColOffset;
-  int32_T aColOffset;
-  int32_T bColOffset;
-  int32_T ia;
-  int32_T j_a;
-  int32_T jb;
-  int32_T ib_j;
-  int32_T i_j;
-  int32_T c_tmp;
-  int32_T k_o;
-  int32_T j_n;
-  int32_T f_k;
-  int32_T loop_ub_i;
-  int32_T CC_RegionLengths;
-  int32_T outsize_idx_0_tmp_tmp;
-  int32_T numRuns;
-  int32_T currentColumn;
-  int32_T firstRunOnPreviousColumn;
-  int32_T lastRunOnPreviousColumn;
-  int32_T firstRunOnThisColumn;
-  int32_T p_o;
-  int32_T runCounter;
-  int32_T row;
-  int32_T root_k;
-  int32_T root_p;
-  int32_T newNumel;
-  int32_T i_n;
-  int32_T i_m;
-  int32_T i_c;
-  int32_T pind;
-  int32_T b_pind;
-  int32_T i_md;
-  int32_T ind;
-  int32_T secondIndRange_idx_0;
-  int32_T secondIndRange_idx_1;
-  int32_T firstIndRange_idx_0;
-  int32_T firstIndRange_idx_1;
-  int32_T indx;
-  int32_T nz;
-  int32_T c_k;
-  int32_T r_tmp;
-  int32_T pixelsPerImPage1_idx_1;
-  int32_T stackTop;
-  int32_T b_z;
-  int32_T d_x;
-  int32_T c_ind;
-  int32_T d_ind;
-  int32_T i_m3;
-  int32_T J_size;
-  int32_T last;
-  int32_T idx;
-  int32_T k_j;
-  int32_T i_h;
-  int32_T numElDst;
-  int32_T numElSrc;
-  int32_T newNumel_c;
-  int32_T i_ct;
-  uint32_T strongest_idx_data;
-  uint32_T numComponents;
-  boolean_T last_endless;
-  boolean_T b_x_data;
-  boolean_T compare_tmp;
-  boolean_T flat;
-  boolean_T flat_p;
-  boolean_T continuePropagation;
+  int32_T i1;
   B_ControlSystem_flightControlSystem_T ControlSystem;/* '<Root>/Control System' */
 } B_flightControlSystem_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  volatile real_T RateTransition_Buffer[10];/* '<Root>/Rate Transition' */
-  real_T xy[2];                        /* '<S2>/Data Store Memory' */
-  real_T prev_endless_x;               /* '<S2>/MATLAB Function2' */
-  real_T prev_endless_y;               /* '<S2>/MATLAB Function2' */
-  struct {
-    void *LoggedData;
-  } Scope_PWORK;                       /* '<S2>/Scope' */
-
-  int32_T sfEvent;                     /* '<S2>/write_or_not' */
-  int32_T sfEvent_i;                   /* '<S2>/speed_calculator' */
-  int32_T sfEvent_d;                   /* '<S2>/opposite_way' */
-  int32_T sfEvent_f;                   /* '<S525>/MATLAB Function' */
-  int32_T sfEvent_m;                   /* '<S2>/center_vector_y' */
-  int32_T sfEvent_a;                   /* '<S2>/center_vector_x' */
-  int32_T sfEvent_g;                   /* '<S2>/Main control' */
-  int32_T sfEvent_b;                   /* '<S2>/MATLAB Function4' */
-  int32_T sfEvent_p;                   /* '<S2>/MATLAB Function2' */
-  int32_T sfEvent_l;                   /* '<S2>/MATLAB Function' */
+  boolean_T Dilation_ONE_PAD_IMG_DW[20625];/* '<S2>/Dilation' */
+  volatile real_T RateTransition_Buffer[12];/* '<Root>/Rate Transition' */
+  real_T DrawShapes_DW_FillColorAdd;   /* '<S2>/Draw Shapes' */
+  real_T DrawShapes_DW_OneMOpacity;    /* '<S2>/Draw Shapes' */
+  int32_T Dilation_NUMNONZ_DW;         /* '<S2>/Dilation' */
+  int32_T Dilation_STREL_DW;           /* '<S2>/Dilation' */
+  int32_T Dilation_DILATE_OFF_DW[9];   /* '<S2>/Dilation' */
   parrot_ImageProcess_flightControlSystem_T obj;/* '<S2>/PARROT Image Conversion' */
   volatile int8_T RateTransition_ActiveBufIdx;/* '<Root>/Rate Transition' */
-  boolean_T doneDoubleBufferReInit;    /* '<S2>/write_or_not' */
-  boolean_T doneDoubleBufferReInit_c;  /* '<S2>/speed_calculator' */
-  boolean_T doneDoubleBufferReInit_f;  /* '<S2>/opposite_way' */
-  boolean_T doneDoubleBufferReInit_d;  /* '<S525>/MATLAB Function' */
-  boolean_T doneDoubleBufferReInit_e;  /* '<S2>/center_vector_y' */
-  boolean_T doneDoubleBufferReInit_ey; /* '<S2>/center_vector_x' */
   boolean_T objisempty;                /* '<S2>/PARROT Image Conversion' */
-  boolean_T doneDoubleBufferReInit_dl; /* '<S2>/Main control' */
-  boolean_T doneDoubleBufferReInit_b;  /* '<S2>/MATLAB Function4' */
-  boolean_T doneDoubleBufferReInit_g;  /* '<S2>/MATLAB Function2' */
-  boolean_T prev_endless_x_not_empty;  /* '<S2>/MATLAB Function2' */
-  boolean_T prev_endless_y_not_empty;  /* '<S2>/MATLAB Function2' */
-  boolean_T doneDoubleBufferReInit_bw; /* '<S2>/MATLAB Function' */
   DW_ControlSystem_flightControlSystem_T ControlSystem;/* '<Root>/Control System' */
 } DW_flightControlSystem_T;
 
@@ -724,26 +466,6 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real32_T minHeightforOF_const;       /* Mask Parameter: minHeightforOF_const
                                         * Referenced by: '<S459>/Constant'
                                         */
-  real32_T CompareToConstant_const_j;
-                                    /* Mask Parameter: CompareToConstant_const_j
-                                     * Referenced by: '<S236>/Constant'
-                                     */
-  real32_T CompareToConstant1_const_e;
-                                   /* Mask Parameter: CompareToConstant1_const_e
-                                    * Referenced by: '<S237>/Constant'
-                                    */
-  real32_T CompareToConstant2_const; /* Mask Parameter: CompareToConstant2_const
-                                      * Referenced by: '<S238>/Constant'
-                                      */
-  real32_T CompareToConstant3_const; /* Mask Parameter: CompareToConstant3_const
-                                      * Referenced by: '<S239>/Constant'
-                                      */
-  real32_T CompareToConstant4_const; /* Mask Parameter: CompareToConstant4_const
-                                      * Referenced by: '<S240>/Constant'
-                                      */
-  real32_T CompareToConstant5_const; /* Mask Parameter: CompareToConstant5_const
-                                      * Referenced by: '<S241>/Constant'
-                                      */
   real32_T DeactivateAccelerationIfOFisnotusedduetolowaltitude_const;
     /* Mask Parameter: DeactivateAccelerationIfOFisnotusedduetolowaltitude_const
      * Referenced by: '<S443>/Constant'
@@ -756,22 +478,42 @@ struct P_ControlSystem_flightControlSystem_T_ {
   /* Mask Parameter: donotuseaccifopticalflowneveravailableNoteOF60HzbutZOHto2001_co
    * Referenced by: '<S446>/Constant'
    */
+  real32_T CompareToConstant2_const; /* Mask Parameter: CompareToConstant2_const
+                                      * Referenced by: '<S238>/Constant'
+                                      */
+  real32_T CompareToConstant4_const; /* Mask Parameter: CompareToConstant4_const
+                                      * Referenced by: '<S240>/Constant'
+                                      */
+  real32_T CompareToConstant3_const; /* Mask Parameter: CompareToConstant3_const
+                                      * Referenced by: '<S239>/Constant'
+                                      */
+  real32_T CompareToConstant5_const; /* Mask Parameter: CompareToConstant5_const
+                                      * Referenced by: '<S241>/Constant'
+                                      */
+  real32_T CompareToConstant_const_j;
+                                    /* Mask Parameter: CompareToConstant_const_j
+                                     * Referenced by: '<S236>/Constant'
+                                     */
+  real32_T CompareToConstant1_const_e;
+                                   /* Mask Parameter: CompareToConstant1_const_e
+                                    * Referenced by: '<S237>/Constant'
+                                    */
   uint32_T WrapToZero_Threshold;       /* Mask Parameter: WrapToZero_Threshold
                                         * Referenced by: '<S249>/FixPt Switch'
-                                        */
-  uint32_T WrapToZero_Threshold_e;     /* Mask Parameter: WrapToZero_Threshold_e
-                                        * Referenced by: '<S435>/FixPt Switch'
                                         */
   uint32_T WrapToZero_Threshold_k;     /* Mask Parameter: WrapToZero_Threshold_k
                                         * Referenced by: '<S516>/FixPt Switch'
                                         */
-  uint32_T CompareToConstant_const_h;
-                                    /* Mask Parameter: CompareToConstant_const_h
-                                     * Referenced by: '<S513>/Constant'
-                                     */
+  uint32_T WrapToZero_Threshold_e;     /* Mask Parameter: WrapToZero_Threshold_e
+                                        * Referenced by: '<S435>/FixPt Switch'
+                                        */
   uint32_T CompareToConstant_const_l;
                                     /* Mask Parameter: CompareToConstant_const_l
                                      * Referenced by: '<S431>/Constant'
+                                     */
+  uint32_T CompareToConstant_const_h;
+                                    /* Mask Parameter: CompareToConstant_const_h
+                                     * Referenced by: '<S513>/Constant'
                                      */
   uint16_T WrapToZero_Threshold_c;     /* Mask Parameter: WrapToZero_Threshold_c
                                         * Referenced by: '<S16>/FixPt Switch'
@@ -792,12 +534,6 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real_T Constant_Value;               /* Expression: 0
                                         * Referenced by: '<S429>/Constant'
                                         */
-  real_T KalmanGainM_Value[2];         /* Expression: pInitialization.M
-                                        * Referenced by: '<S259>/KalmanGainM'
-                                        */
-  real_T C_Value[2];                   /* Expression: pInitialization.C
-                                        * Referenced by: '<S255>/C'
-                                        */
   real_T Delay2_InitialCondition;      /* Expression: 0
                                         * Referenced by: '<S251>/Delay2'
                                         */
@@ -816,6 +552,12 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real_T sonarFilter_IIR_InitialStates;/* Expression: 0
                                         * Referenced by: '<S256>/sonarFilter_IIR'
                                         */
+  real_T KalmanGainM_Value[2];         /* Expression: pInitialization.M
+                                        * Referenced by: '<S259>/KalmanGainM'
+                                        */
+  real_T C_Value[2];                   /* Expression: pInitialization.C
+                                        * Referenced by: '<S255>/C'
+                                        */
   real_T KalmanGainM_Value_l[2];       /* Expression: pInitialization.M
                                         * Referenced by: '<S322>/KalmanGainM'
                                         */
@@ -825,8 +567,44 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real_T KalmanGainM_Value_i[8];       /* Expression: pInitialization.M
                                         * Referenced by: '<S460>/KalmanGainM'
                                         */
-  real_T speed_Value;                  /* Expression: 0.01
-                                        * Referenced by: '<S5>/speed'
+  real_T KalmanGainL_Value[8];         /* Expression: pInitialization.L
+                                        * Referenced by: '<S460>/KalmanGainL'
+                                        */
+  real_T gravity_Value[3];             /* Expression: [0 0 -g]
+                                        * Referenced by: '<S438>/gravity'
+                                        */
+  real_T gainaccinput1_Gain;           /* Expression: 1
+                                        * Referenced by: '<S438>/gainaccinput1'
+                                        */
+  real_T Constant_Value_g;             /* Expression: -1.1
+                                        * Referenced by: '<S5>/Constant'
+                                        */
+  real_T Constant_Value_n;             /* Expression: 0
+                                        * Referenced by: '<S3>/Constant'
+                                        */
+  real_T Switch_Threshold;             /* Expression: 0
+                                        * Referenced by: '<S12>/Switch'
+                                        */
+  real_T A_Value[4];                   /* Expression: pInitialization.A
+                                        * Referenced by: '<S255>/A'
+                                        */
+  real_T gravity_Value_j[3];           /* Expression: [0 0 g]
+                                        * Referenced by: '<S251>/gravity'
+                                        */
+  real_T KalmanGainL_Value_p[2];       /* Expression: pInitialization.L
+                                        * Referenced by: '<S376>/KalmanGainL'
+                                        */
+  real_T KalmanGainL_Value_l[2];       /* Expression: pInitialization.L
+                                        * Referenced by: '<S322>/KalmanGainL'
+                                        */
+  real_T B_Value[2];                   /* Expression: pInitialization.B
+                                        * Referenced by: '<S255>/B'
+                                        */
+  real_T D_Value;                      /* Expression: pInitialization.D
+                                        * Referenced by: '<S255>/D'
+                                        */
+  real_T KalmanGainL_Value_b[2];       /* Expression: pInitialization.L
+                                        * Referenced by: '<S259>/KalmanGainL'
                                         */
   real_T Wait3Seconds_Value;           /* Expression: 200*3
                                         * Referenced by: '<S4>/Wait  3 Seconds'
@@ -837,26 +615,26 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real_T u5meters_Value;               /* Expression: 0.5
                                         * Referenced by: '<S4>/0.5 meters'
                                         */
-  real_T A_Value[4];                   /* Expression: pInitialization.A
-                                        * Referenced by: '<S255>/A'
+  real_T CovarianceZ_Value[16];        /* Expression: pInitialization.Z
+                                        * Referenced by: '<S460>/CovarianceZ'
                                         */
-  real_T B_Value[2];                   /* Expression: pInitialization.B
-                                        * Referenced by: '<S255>/B'
-                                        */
-  real_T CovarianceZ_Value[4];         /* Expression: pInitialization.Z
+  real_T CovarianceZ_Value_b[4];       /* Expression: pInitialization.Z
                                         * Referenced by: '<S259>/CovarianceZ'
-                                        */
-  real_T KalmanGainL_Value[2];         /* Expression: pInitialization.L
-                                        * Referenced by: '<S259>/KalmanGainL'
-                                        */
-  real_T D_Value;                      /* Expression: pInitialization.D
-                                        * Referenced by: '<S255>/D'
                                         */
   real_T P0_Value[4];                  /* Expression: pInitialization.P0
                                         * Referenced by: '<S255>/P0'
                                         */
+  real_T CovarianceZ_Value_bp[4];      /* Expression: pInitialization.Z
+                                        * Referenced by: '<S322>/CovarianceZ'
+                                        */
+  real_T CovarianceZ_Value_m[4];       /* Expression: pInitialization.Z
+                                        * Referenced by: '<S376>/CovarianceZ'
+                                        */
   real_T G_Value[2];                   /* Expression: pInitialization.G
                                         * Referenced by: '<S255>/G'
+                                        */
+  real_T Constant1_Value;              /* Expression: 1
+                                        * Referenced by: '<S5>/Constant1'
                                         */
   real_T H_Value;                      /* Expression: pInitialization.H
                                         * Referenced by: '<S255>/H'
@@ -864,38 +642,11 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real_T N_Value;                      /* Expression: pInitialization.N
                                         * Referenced by: '<S255>/N'
                                         */
-  real_T gravity_Value[3];             /* Expression: [0 0 g]
-                                        * Referenced by: '<S251>/gravity'
-                                        */
   real_T Q_Value;                      /* Expression: pInitialization.Q
                                         * Referenced by: '<S255>/Q'
                                         */
   real_T R_Value;                      /* Expression: pInitialization.R
                                         * Referenced by: '<S255>/R'
-                                        */
-  real_T CovarianceZ_Value_b[4];       /* Expression: pInitialization.Z
-                                        * Referenced by: '<S322>/CovarianceZ'
-                                        */
-  real_T KalmanGainL_Value_l[2];       /* Expression: pInitialization.L
-                                        * Referenced by: '<S322>/KalmanGainL'
-                                        */
-  real_T CovarianceZ_Value_m[4];       /* Expression: pInitialization.Z
-                                        * Referenced by: '<S376>/CovarianceZ'
-                                        */
-  real_T KalmanGainL_Value_p[2];       /* Expression: pInitialization.L
-                                        * Referenced by: '<S376>/KalmanGainL'
-                                        */
-  real_T gravity_Value_p[3];           /* Expression: [0 0 -g]
-                                        * Referenced by: '<S438>/gravity'
-                                        */
-  real_T gainaccinput1_Gain;           /* Expression: 1
-                                        * Referenced by: '<S438>/gainaccinput1'
-                                        */
-  real_T CovarianceZ_Value_p[16];      /* Expression: pInitialization.Z
-                                        * Referenced by: '<S460>/CovarianceZ'
-                                        */
-  real_T KalmanGainL_Value_k[8];       /* Expression: pInitialization.L
-                                        * Referenced by: '<S460>/KalmanGainL'
                                         */
   real32_T takeoff_gain1_Gain;         /* Expression: Controller.takeoffGain
                                         * Referenced by: '<S7>/takeoff_gain1'
@@ -914,6 +665,12 @@ struct P_ControlSystem_flightControlSystem_T_ {
                                       */
   real32_T Gain_Gain[2];               /* Computed Parameter: Gain_Gain
                                         * Referenced by: '<S10>/Gain'
+                                        */
+  real32_T Gain1_Gain[4];              /* Computed Parameter: Gain1_Gain
+                                        * Referenced by: '<S12>/Gain1'
+                                        */
+  real32_T Gain2_Gain[4];              /* Computed Parameter: Gain2_Gain
+                                        * Referenced by: '<S12>/Gain2'
                                         */
   real32_T _Value_i;                   /* Computed Parameter: _Value_i
                                         * Referenced by: '<S4>/    '
@@ -937,6 +694,12 @@ struct P_ControlSystem_flightControlSystem_T_ {
                              /* Computed Parameter: opticalFlowErrorCorrect_Gain
                               * Referenced by: '<S442>/opticalFlowErrorCorrect'
                               */
+  real32_T TorqueTotalThrustToThrustPerMotor_Value[16];/* Expression: Controller.Q2Ts
+                                                        * Referenced by: '<S9>/TorqueTotalThrustToThrustPerMotor'
+                                                        */
+  real32_T A_Value_a[16];              /* Computed Parameter: A_Value_a
+                                        * Referenced by: '<S441>/A'
+                                        */
   real32_T SimplyIntegrateVelocity_gainval;
                           /* Computed Parameter: SimplyIntegrateVelocity_gainval
                            * Referenced by: '<S437>/SimplyIntegrateVelocity'
@@ -971,8 +734,8 @@ struct P_ControlSystem_flightControlSystem_T_ {
                                 /* Computed Parameter: DiscreteTimeIntegrator_IC
                                  * Referenced by: '<S319>/Discrete-Time Integrator'
                                  */
-  real32_T C_Value_h[2];               /* Computed Parameter: C_Value_h
-                                        * Referenced by: '<S321>/C'
+  real32_T X0_Value_i[2];              /* Computed Parameter: X0_Value_i
+                                        * Referenced by: '<S321>/X0'
                                         */
   real32_T Assumingthatthepreflightcalibrationwasdoneatlevelorientation_Bi[6];
   /* Computed Parameter: Assumingthatthepreflightcalibrationwasdoneatlevelorientation_Bi
@@ -989,23 +752,20 @@ struct P_ControlSystem_flightControlSystem_T_ {
                                 /* Computed Parameter: FIR_IMUaccel_Coefficients
                                  * Referenced by: '<S253>/FIR_IMUaccel'
                                  */
-  real32_T Gain2_Gain;                 /* Computed Parameter: Gain2_Gain
+  real32_T Gain2_Gain_p;               /* Computed Parameter: Gain2_Gain_p
                                         * Referenced by: '<S317>/Gain2'
-                                        */
-  real32_T X0_Value_i[2];              /* Computed Parameter: X0_Value_i
-                                        * Referenced by: '<S321>/X0'
                                         */
   real32_T Constant_Value_h;           /* Computed Parameter: Constant_Value_h
                                         * Referenced by: '<S320>/Constant'
                                         */
-  real32_T C_Value_i[2];               /* Computed Parameter: C_Value_i
-                                        * Referenced by: '<S375>/C'
+  real32_T C_Value_h[2];               /* Computed Parameter: C_Value_h
+                                        * Referenced by: '<S321>/C'
                                         */
   real32_T X0_Value_iy[2];             /* Computed Parameter: X0_Value_iy
                                         * Referenced by: '<S375>/X0'
                                         */
-  real32_T C_Value_i2[8];              /* Computed Parameter: C_Value_i2
-                                        * Referenced by: '<S441>/C'
+  real32_T C_Value_i[2];               /* Computed Parameter: C_Value_i
+                                        * Referenced by: '<S375>/C'
                                         */
   real32_T LPFFcutoff40Hz1_NumCoef[2];
                                   /* Computed Parameter: LPFFcutoff40Hz1_NumCoef
@@ -1044,11 +804,14 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real32_T Constant_Value_j;           /* Computed Parameter: Constant_Value_j
                                         * Referenced by: '<S319>/Constant'
                                         */
-  real32_T Gain1_Gain;                 /* Computed Parameter: Gain1_Gain
-                                        * Referenced by: '<S439>/Gain1'
-                                        */
   real32_T X0_Value_c[4];              /* Computed Parameter: X0_Value_c
                                         * Referenced by: '<S441>/X0'
+                                        */
+  real32_T C_Value_i2[8];              /* Computed Parameter: C_Value_i2
+                                        * Referenced by: '<S441>/C'
+                                        */
+  real32_T Gain1_Gain_n;               /* Computed Parameter: Gain1_Gain_n
+                                        * Referenced by: '<S439>/Gain1'
                                         */
   real32_T IIRgyroz_NumCoef[6];        /* Computed Parameter: IIRgyroz_NumCoef
                                         * Referenced by: '<S440>/IIRgyroz'
@@ -1069,6 +832,36 @@ struct P_ControlSystem_flightControlSystem_T_ {
                                   /* Computed Parameter: Delay1_InitialCondition
                                    * Referenced by: '<S6>/Delay1'
                                    */
+  real32_T B_Value_f[8];               /* Computed Parameter: B_Value_f
+                                        * Referenced by: '<S441>/B'
+                                        */
+  real32_T D_Value_h[4];               /* Computed Parameter: D_Value_h
+                                        * Referenced by: '<S441>/D'
+                                        */
+  real32_T Integrator_gainval;         /* Computed Parameter: Integrator_gainval
+                                        * Referenced by: '<S216>/Integrator'
+                                        */
+  real32_T LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrolle[2];
+  /* Computed Parameter: LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrolle
+   * Referenced by: '<S10>/LPF 8Hz Cutoff Filter to avoid oscillations  induced by position controller'
+   */
+  real32_T LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrol_c[2];
+  /* Computed Parameter: LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrol_c
+   * Referenced by: '<S10>/LPF 8Hz Cutoff Filter to avoid oscillations  induced by position controller'
+   */
+  real32_T LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrol_l;
+  /* Computed Parameter: LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrol_l
+   * Referenced by: '<S10>/LPF 8Hz Cutoff Filter to avoid oscillations  induced by position controller'
+   */
+  real32_T Integrator_gainval_i;     /* Computed Parameter: Integrator_gainval_i
+                                      * Referenced by: '<S107>/Integrator'
+                                      */
+  real32_T Filter_gainval;             /* Computed Parameter: Filter_gainval
+                                        * Referenced by: '<S102>/Filter'
+                                        */
+  real32_T w1_Value;                   /* Computed Parameter: w1_Value
+                                        * Referenced by: '<S7>/w1'
+                                        */
   real32_T DiscreteTimeIntegrator_gainval_n;
                          /* Computed Parameter: DiscreteTimeIntegrator_gainval_n
                           * Referenced by: '<S7>/Discrete-Time Integrator'
@@ -1085,12 +878,6 @@ struct P_ControlSystem_flightControlSystem_T_ {
                           /* Computed Parameter: DiscreteTimeIntegrator_LowerSat
                            * Referenced by: '<S7>/Discrete-Time Integrator'
                            */
-  real32_T I_pr_Gain;                  /* Computed Parameter: I_pr_Gain
-                                        * Referenced by: '<S7>/I_pr'
-                                        */
-  real32_T w1_Value;                   /* Computed Parameter: w1_Value
-                                        * Referenced by: '<S7>/w1'
-                                        */
   real32_T SaturationThrust1_UpperSat;
                                /* Computed Parameter: SaturationThrust1_UpperSat
                                 * Referenced by: '<S7>/SaturationThrust1'
@@ -1099,36 +886,6 @@ struct P_ControlSystem_flightControlSystem_T_ {
                                /* Computed Parameter: SaturationThrust1_LowerSat
                                 * Referenced by: '<S7>/SaturationThrust1'
                                 */
-  real32_T Integrator_gainval;         /* Computed Parameter: Integrator_gainval
-                                        * Referenced by: '<S216>/Integrator'
-                                        */
-  real32_T LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrolle[2];
-  /* Computed Parameter: LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrolle
-   * Referenced by: '<S10>/LPF 8Hz Cutoff Filter to avoid oscillations  induced by position controller'
-   */
-  real32_T LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrol_c[2];
-  /* Computed Parameter: LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrol_c
-   * Referenced by: '<S10>/LPF 8Hz Cutoff Filter to avoid oscillations  induced by position controller'
-   */
-  real32_T LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrol_l;
-  /* Computed Parameter: LPF8HzCutoffFiltertoavoidoscillationsinducedbypositioncontrol_l
-   * Referenced by: '<S10>/LPF 8Hz Cutoff Filter to avoid oscillations  induced by position controller'
-   */
-  real32_T Clamping_zero_Value;       /* Computed Parameter: Clamping_zero_Value
-                                       * Referenced by: '<S97>/Clamping_zero'
-                                       */
-  real32_T Integrator_gainval_i;     /* Computed Parameter: Integrator_gainval_i
-                                      * Referenced by: '<S107>/Integrator'
-                                      */
-  real32_T Filter_gainval;             /* Computed Parameter: Filter_gainval
-                                        * Referenced by: '<S102>/Filter'
-                                        */
-  real32_T Constant1_Value;            /* Computed Parameter: Constant1_Value
-                                        * Referenced by: '<S97>/Constant1'
-                                        */
-  real32_T TorqueTotalThrustToThrustPerMotor_Value[16];/* Expression: Controller.Q2Ts
-                                                        * Referenced by: '<S9>/TorqueTotalThrustToThrustPerMotor'
-                                                        */
   real32_T Saturation_UpperSat;       /* Computed Parameter: Saturation_UpperSat
                                        * Referenced by: '<S11>/Saturation'
                                        */
@@ -1149,6 +906,39 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real32_T D_yaw_Gain;                 /* Computed Parameter: D_yaw_Gain
                                         * Referenced by: '<S11>/D_yaw'
                                         */
+  real32_T Gain_Gain_b;                /* Computed Parameter: Gain_Gain_b
+                                        * Referenced by: '<S12>/Gain'
+                                        */
+  real32_T Saturation_UpperSat_n;      /* Expression: Vehicle.Motor.maxLimit
+                                        * Referenced by: '<S12>/Saturation'
+                                        */
+  real32_T Saturation_LowerSat_i;      /* Expression: Vehicle.Motor.minLimit
+                                        * Referenced by: '<S12>/Saturation'
+                                        */
+  real32_T A_Value_k[4];               /* Computed Parameter: A_Value_k
+                                        * Referenced by: '<S321>/A'
+                                        */
+  real32_T A_Value_ah[4];              /* Computed Parameter: A_Value_ah
+                                        * Referenced by: '<S375>/A'
+                                        */
+  real32_T B_Value_g[2];               /* Computed Parameter: B_Value_g
+                                        * Referenced by: '<S375>/B'
+                                        */
+  real32_T D_Value_k;                  /* Computed Parameter: D_Value_k
+                                        * Referenced by: '<S375>/D'
+                                        */
+  real32_T B_Value_o[2];               /* Computed Parameter: B_Value_o
+                                        * Referenced by: '<S321>/B'
+                                        */
+  real32_T D_Value_kg;                 /* Computed Parameter: D_Value_kg
+                                        * Referenced by: '<S321>/D'
+                                        */
+  real32_T Clamping_zero_Value;       /* Computed Parameter: Clamping_zero_Value
+                                       * Referenced by: '<S97>/Clamping_zero'
+                                       */
+  real32_T Constant1_Value_n;          /* Computed Parameter: Constant1_Value_n
+                                        * Referenced by: '<S97>/Constant1'
+                                        */
   real32_T Clamping_zero_Value_m;   /* Computed Parameter: Clamping_zero_Value_m
                                      * Referenced by: '<S206>/Clamping_zero'
                                      */
@@ -1158,87 +948,14 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real32_T I_yaw_Gain;                 /* Computed Parameter: I_yaw_Gain
                                         * Referenced by: '<S11>/I_yaw'
                                         */
-  real32_T ThrustToMotorCommand_Gain;
-                                /* Computed Parameter: ThrustToMotorCommand_Gain
-                                 * Referenced by: '<S12>/ThrustToMotorCommand'
-                                 */
-  real32_T Saturation5_UpperSat;       /* Expression: Vehicle.Motor.maxLimit
-                                        * Referenced by: '<S12>/Saturation5'
+  real32_T I_pr_Gain;                  /* Computed Parameter: I_pr_Gain
+                                        * Referenced by: '<S7>/I_pr'
                                         */
-  real32_T Saturation5_LowerSat;       /* Expression: Vehicle.Motor.minLimit
-                                        * Referenced by: '<S12>/Saturation5'
-                                        */
-  real32_T MotorDirections_Gain[4];  /* Computed Parameter: MotorDirections_Gain
-                                      * Referenced by: '<S12>/MotorDirections'
-                                      */
   real32_T Gain_Gain_o;                /* Computed Parameter: Gain_Gain_o
                                         * Referenced by: '<S4>/Gain'
                                         */
   real32_T Gain1_Gain_p;               /* Computed Parameter: Gain1_Gain_p
                                         * Referenced by: '<S4>/Gain1'
-                                        */
-  real32_T A_Value_k[4];               /* Computed Parameter: A_Value_k
-                                        * Referenced by: '<S321>/A'
-                                        */
-  real32_T B_Value_o[2];               /* Computed Parameter: B_Value_o
-                                        * Referenced by: '<S321>/B'
-                                        */
-  real32_T D_Value_k;                  /* Computed Parameter: D_Value_k
-                                        * Referenced by: '<S321>/D'
-                                        */
-  real32_T P0_Value_h[4];              /* Computed Parameter: P0_Value_h
-                                        * Referenced by: '<S321>/P0'
-                                        */
-  real32_T G_Value_m[4];               /* Computed Parameter: G_Value_m
-                                        * Referenced by: '<S321>/G'
-                                        */
-  real32_T H_Value_a[2];               /* Computed Parameter: H_Value_a
-                                        * Referenced by: '<S321>/H'
-                                        */
-  real32_T N_Value_f[2];               /* Computed Parameter: N_Value_f
-                                        * Referenced by: '<S321>/N'
-                                        */
-  real32_T Q_Value_j[4];               /* Computed Parameter: Q_Value_j
-                                        * Referenced by: '<S321>/Q'
-                                        */
-  real32_T R_Value_a;                  /* Computed Parameter: R_Value_a
-                                        * Referenced by: '<S321>/R'
-                                        */
-  real32_T A_Value_a[4];               /* Computed Parameter: A_Value_a
-                                        * Referenced by: '<S375>/A'
-                                        */
-  real32_T B_Value_g[2];               /* Computed Parameter: B_Value_g
-                                        * Referenced by: '<S375>/B'
-                                        */
-  real32_T D_Value_ke;                 /* Computed Parameter: D_Value_ke
-                                        * Referenced by: '<S375>/D'
-                                        */
-  real32_T P0_Value_l[4];              /* Computed Parameter: P0_Value_l
-                                        * Referenced by: '<S375>/P0'
-                                        */
-  real32_T G_Value_g[4];               /* Computed Parameter: G_Value_g
-                                        * Referenced by: '<S375>/G'
-                                        */
-  real32_T H_Value_o[2];               /* Computed Parameter: H_Value_o
-                                        * Referenced by: '<S375>/H'
-                                        */
-  real32_T N_Value_b[2];               /* Computed Parameter: N_Value_b
-                                        * Referenced by: '<S375>/N'
-                                        */
-  real32_T Q_Value_p[4];               /* Computed Parameter: Q_Value_p
-                                        * Referenced by: '<S375>/Q'
-                                        */
-  real32_T R_Value_l;                  /* Computed Parameter: R_Value_l
-                                        * Referenced by: '<S375>/R'
-                                        */
-  real32_T A_Value_a4[16];             /* Computed Parameter: A_Value_a4
-                                        * Referenced by: '<S441>/A'
-                                        */
-  real32_T B_Value_f[8];               /* Computed Parameter: B_Value_f
-                                        * Referenced by: '<S441>/B'
-                                        */
-  real32_T D_Value_h[4];               /* Computed Parameter: D_Value_h
-                                        * Referenced by: '<S441>/D'
                                         */
   real32_T P0_Value_e[16];             /* Computed Parameter: P0_Value_e
                                         * Referenced by: '<S441>/P0'
@@ -1246,25 +963,61 @@ struct P_ControlSystem_flightControlSystem_T_ {
   real32_T G_Value_i[16];              /* Computed Parameter: G_Value_i
                                         * Referenced by: '<S441>/G'
                                         */
+  real32_T Q_Value_m[16];              /* Computed Parameter: Q_Value_m
+                                        * Referenced by: '<S441>/Q'
+                                        */
   real32_T H_Value_i[8];               /* Computed Parameter: H_Value_i
                                         * Referenced by: '<S441>/H'
                                         */
   real32_T N_Value_i[8];               /* Computed Parameter: N_Value_i
                                         * Referenced by: '<S441>/N'
                                         */
-  real32_T Q_Value_m[16];              /* Computed Parameter: Q_Value_m
-                                        * Referenced by: '<S441>/Q'
+  real32_T P0_Value_h[4];              /* Computed Parameter: P0_Value_h
+                                        * Referenced by: '<S321>/P0'
+                                        */
+  real32_T G_Value_m[4];               /* Computed Parameter: G_Value_m
+                                        * Referenced by: '<S321>/G'
+                                        */
+  real32_T Q_Value_j[4];               /* Computed Parameter: Q_Value_j
+                                        * Referenced by: '<S321>/Q'
+                                        */
+  real32_T P0_Value_l[4];              /* Computed Parameter: P0_Value_l
+                                        * Referenced by: '<S375>/P0'
+                                        */
+  real32_T G_Value_g[4];               /* Computed Parameter: G_Value_g
+                                        * Referenced by: '<S375>/G'
+                                        */
+  real32_T Q_Value_p[4];               /* Computed Parameter: Q_Value_p
+                                        * Referenced by: '<S375>/Q'
                                         */
   real32_T R_Value_h[4];               /* Computed Parameter: R_Value_h
                                         * Referenced by: '<S441>/R'
                                         */
+  real32_T H_Value_a[2];               /* Computed Parameter: H_Value_a
+                                        * Referenced by: '<S321>/H'
+                                        */
+  real32_T N_Value_f[2];               /* Computed Parameter: N_Value_f
+                                        * Referenced by: '<S321>/N'
+                                        */
+  real32_T H_Value_o[2];               /* Computed Parameter: H_Value_o
+                                        * Referenced by: '<S375>/H'
+                                        */
+  real32_T N_Value_b[2];               /* Computed Parameter: N_Value_b
+                                        * Referenced by: '<S375>/N'
+                                        */
+  real32_T R_Value_a;                  /* Computed Parameter: R_Value_a
+                                        * Referenced by: '<S321>/R'
+                                        */
+  real32_T R_Value_l;                  /* Computed Parameter: R_Value_l
+                                        * Referenced by: '<S375>/R'
+                                        */
   uint32_T Output_InitialCondition;
                                   /* Computed Parameter: Output_InitialCondition
-                                   * Referenced by: '<S514>/Output'
+                                   * Referenced by: '<S432>/Output'
                                    */
-  uint32_T Output_InitialCondition_e;
-                                /* Computed Parameter: Output_InitialCondition_e
-                                 * Referenced by: '<S432>/Output'
+  uint32_T Output_InitialCondition_f;
+                                /* Computed Parameter: Output_InitialCondition_f
+                                 * Referenced by: '<S514>/Output'
                                  */
   uint32_T Output_InitialCondition_h;
                                 /* Computed Parameter: Output_InitialCondition_h
@@ -1276,22 +1029,22 @@ struct P_ControlSystem_flightControlSystem_T_ {
   uint32_T Constant_Value_a;           /* Computed Parameter: Constant_Value_a
                                         * Referenced by: '<S249>/Constant'
                                         */
-  uint32_T FixPtConstant_Value_m;   /* Computed Parameter: FixPtConstant_Value_m
-                                     * Referenced by: '<S434>/FixPt Constant'
-                                     */
-  uint32_T Constant_Value_jy;          /* Computed Parameter: Constant_Value_jy
-                                        * Referenced by: '<S435>/Constant'
-                                        */
   uint32_T FixPtConstant_Value_p;   /* Computed Parameter: FixPtConstant_Value_p
                                      * Referenced by: '<S515>/FixPt Constant'
                                      */
   uint32_T Constant_Value_e;           /* Computed Parameter: Constant_Value_e
                                         * Referenced by: '<S516>/Constant'
                                         */
-  uint16_T Output_InitialCondition_f;
-                                /* Computed Parameter: Output_InitialCondition_f
-                                 * Referenced by: '<S14>/Output'
-                                 */
+  uint32_T FixPtConstant_Value_m;   /* Computed Parameter: FixPtConstant_Value_m
+                                     * Referenced by: '<S434>/FixPt Constant'
+                                     */
+  uint32_T Constant_Value_jy;          /* Computed Parameter: Constant_Value_jy
+                                        * Referenced by: '<S435>/Constant'
+                                        */
+  uint16_T Output_InitialCondition_fi;
+                               /* Computed Parameter: Output_InitialCondition_fi
+                                * Referenced by: '<S14>/Output'
+                                */
   uint16_T FixPtConstant_Value_g;   /* Computed Parameter: FixPtConstant_Value_g
                                      * Referenced by: '<S15>/FixPt Constant'
                                      */
@@ -1303,6 +1056,9 @@ struct P_ControlSystem_flightControlSystem_T_ {
                               * Referenced by: '<S1>/controlModePosVsOrient'
                               */
   boolean_T isSqrtUsed_Value;          /* Expression: pInitialization.isSqrtUsed
+                                        * Referenced by: '<S508>/isSqrtUsed'
+                                        */
+  boolean_T isSqrtUsed_Value_a;        /* Expression: pInitialization.isSqrtUsed
                                         * Referenced by: '<S305>/isSqrtUsed'
                                         */
   boolean_T isSqrtUsed_Value_f;        /* Expression: pInitialization.isSqrtUsed
@@ -1310,9 +1066,6 @@ struct P_ControlSystem_flightControlSystem_T_ {
                                         */
   boolean_T isSqrtUsed_Value_j;        /* Expression: pInitialization.isSqrtUsed
                                         * Referenced by: '<S424>/isSqrtUsed'
-                                        */
-  boolean_T isSqrtUsed_Value_l;        /* Expression: pInitialization.isSqrtUsed
-                                        * Referenced by: '<S508>/isSqrtUsed'
                                         */
   int8_T Constant_Value_km;            /* Computed Parameter: Constant_Value_km
                                         * Referenced by: '<S97>/Constant'
@@ -1368,18 +1121,22 @@ struct P_flightControlSystem_T_ {
                                          *   '<S256>/SaturationSonar'
                                          *   '<S310>/Constant'
                                          */
-  real_T Constant1_Value;              /* Expression: 70
-                                        * Referenced by: '<S2>/Constant1'
+  real_T DrawShapes_opacity;           /* Mask Parameter: DrawShapes_opacity
+                                        * Referenced by: '<S2>/Draw Shapes'
                                         */
-  real_T Constant_Value;               /* Expression: 16
-                                        * Referenced by: '<S2>/Constant'
+  real_T circle_pts_Value[3];          /* Expression: [19, 19, 19]
+                                        * Referenced by: '<S2>/circle_pts'
                                         */
-  real_T switch_way_Threshold;         /* Expression: 0
-                                        * Referenced by: '<S2>/switch_way'
+  real_T circle_size_Value[1444];
+  /* Expression: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+   * Referenced by: '<S2>/circle_size'
+   */
+  real_T Switch_Threshold;             /* Expression: 0
+                                        * Referenced by: '<S2>/Switch'
                                         */
-  real_T DataStoreMemory_InitialValue[2];/* Expression: [0 0]
-                                          * Referenced by: '<S2>/Data Store Memory'
-                                          */
+  real_T speed_const_Value;            /* Expression: 15000000
+                                        * Referenced by: '<S2>/speed_const'
+                                        */
   real_T RateTransition_InitialCondition;/* Expression: 0
                                           * Referenced by: '<Root>/Rate Transition'
                                           */
@@ -1390,26 +1147,6 @@ struct P_flightControlSystem_T_ {
 struct tag_RTM_flightControlSystem_T {
   const char_T *errorStatus;
   RTWLogInfo *rtwLogInfo;
-  RTWExtModeInfo *extModeInfo;
-
-  /*
-   * Sizes:
-   * The following substructure contains sizes information
-   * for many of the model attributes such as inputs, outputs,
-   * dwork, sample times, etc.
-   */
-  struct {
-    uint32_T checksums[4];
-  } Sizes;
-
-  /*
-   * SpecialInfo:
-   * The following substructure contains special information
-   * related to other components that are dependent on RTW.
-   */
-  struct {
-    const void *mappingInfo;
-  } SpecialInfo;
 
   /*
    * Timing:
@@ -1421,8 +1158,6 @@ struct tag_RTM_flightControlSystem_T {
     uint32_T clockTick0;
     uint32_T clockTickH0;
     time_T stepSize0;
-    uint32_T clockTick1;
-    uint32_T clockTickH1;
     struct {
       uint8_T TID[2];
     } TaskCounters;
@@ -1457,8 +1192,8 @@ extern ExtY_flightControlSystem_T flightControlSystem_Y;
  */
 extern CommandBus cmd_inport;          /* '<Root>/AC cmd' */
 extern SensorsBus sensor_inport;       /* '<Root>/Sensors' */
-extern real32_T motors_outport[4];     /* '<S12>/MotorDirections' */
-extern uint8_T flag_outport;           /* '<S4>/Merge' */
+extern real32_T motors_outport[4];     /* '<Root>/Control System' */
+extern uint8_T flag_outport;           /* '<Root>/Control System' */
 
 /* External function called from main */
 extern void flightControlSystem_SetEventsForThisBaseStep(boolean_T *eventFlags);
@@ -2007,16 +1742,7 @@ extern volatile boolean_T runModel;
  * '<S516>' : 'flightControlSystem/Control System/State Estimator/XY Position Estimator/EstimatorVelocity/xy velocity w//o angular velocity compensation/Counter Free-Running/Wrap To Zero'
  * '<S517>' : 'flightControlSystem/Control System/State Estimator/XY Position Estimator/EstimatorXYPosition/Rotation Angles to Direction Cosine Matrix'
  * '<S518>' : 'flightControlSystem/Control System/State Estimator/XY Position Estimator/EstimatorXYPosition/Rotation Angles to Direction Cosine Matrix/Create 3x3 Matrix'
- * '<S519>' : 'flightControlSystem/Image Processing System/MATLAB Function'
- * '<S520>' : 'flightControlSystem/Image Processing System/MATLAB Function2'
- * '<S521>' : 'flightControlSystem/Image Processing System/MATLAB Function4'
- * '<S522>' : 'flightControlSystem/Image Processing System/Main control'
- * '<S523>' : 'flightControlSystem/Image Processing System/center_vector_x'
- * '<S524>' : 'flightControlSystem/Image Processing System/center_vector_y'
- * '<S525>' : 'flightControlSystem/Image Processing System/image preprocess'
- * '<S526>' : 'flightControlSystem/Image Processing System/opposite_way'
- * '<S527>' : 'flightControlSystem/Image Processing System/speed_calculator'
- * '<S528>' : 'flightControlSystem/Image Processing System/write_or_not'
- * '<S529>' : 'flightControlSystem/Image Processing System/image preprocess/MATLAB Function'
+ * '<S519>' : 'flightControlSystem/Image Processing System/Boundary Detection'
+ * '<S520>' : 'flightControlSystem/Image Processing System/Image Preprocessing'
  */
 #endif                                 /* flightControlSystem_h_ */

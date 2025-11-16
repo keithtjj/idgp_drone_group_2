@@ -7,12 +7,12 @@ set COMPILER=C:\ProgramData\MATLAB\SupportPackages\R2024b\3P.instrset\mingw_w64.
                 set DEBUGFLAGS=-g
                 set LINKER=C:\ProgramData\MATLAB\SupportPackages\R2024b\3P.instrset\mingw_w64.instrset\bin\gcc
                 set CXXLINKER=C:\ProgramData\MATLAB\SupportPackages\R2024b\3P.instrset\mingw_w64.instrset\bin\g++
-                set LINKFLAGS=-m64 -Wl,--no-undefined -shared -static -L"D:\MatLab2024b\extern\lib\win64\mingw64" -llibmx -llibmex -llibmat -lm -llibmwlapack -llibmwblas -Wl,"D:\MatLab2024b/extern/lib/win64/mingw64/mexFunction.def"
+                set LINKFLAGS=-m64 -Wl,--no-undefined -shared -static -L"C:\Program Files\MATLAB\R2024b\extern\lib\win64\mingw64" -llibmx -llibmex -llibmat -lm -llibmwlapack -llibmwblas -Wl,"C:\Program Files\MATLAB\R2024b/extern/lib/win64/mingw64/mexFunction.def"
                 set LINKDEBUGFLAGS=-g
                 set NAME_OUTPUT=-o "%OUTDIR%%MEX_NAME%%MEX_EXT%"
-set PATH=C:\ProgramData\MATLAB\SupportPackages\R2024b\3P.instrset\mingw_w64.instrset\bin;D:\MatLab2024b\extern\include\win64;D:\MatLab2024b\extern\include;D:\MatLab2024b\simulink\include;D:\MatLab2024b\lib\win64;%MATLAB_BIN%;%PATH%
+set PATH=C:\ProgramData\MATLAB\SupportPackages\R2024b\3P.instrset\mingw_w64.instrset\bin;C:\Program Files\MATLAB\R2024b\extern\include\win64;C:\Program Files\MATLAB\R2024b\extern\include;C:\Program Files\MATLAB\R2024b\simulink\include;C:\Program Files\MATLAB\R2024b\lib\win64;%MATLAB_BIN%;%PATH%
 set INCLUDE=C:\ProgramData\MATLAB\SupportPackages\R2024b\3P.instrset\mingw_w64.instrset\include;;%INCLUDE%
 set LIB=C:\ProgramData\MATLAB\SupportPackages\R2024b\3P.instrset\mingw_w64.instrset\lib;;%LIB%
-set LIBPATH=D:\MatLab2024b\extern\lib\win64;%LIBPATH%
+set LIBPATH=C:\Program Files\MATLAB\R2024b\extern\lib\win64;%LIBPATH%
 
 gmake SHELL="cmd" -f flightControlSystem_sfun.gmk

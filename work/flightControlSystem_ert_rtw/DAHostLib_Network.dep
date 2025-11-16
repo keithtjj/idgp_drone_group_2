@@ -1,0 +1,8 @@
+DAHostLib_Network.o DAHostLib_Network.o: \
+ C:/PROGRA~1/MATLAB/R2024b/toolbox/shared/spc/src_ml/extern/src/DAHostLib_Network.c \
+ C:/PROGRA~1/MATLAB/R2024b/toolbox/shared/spc/src_ml/extern/include/DAHostLib_Network.h \
+ C:/PROGRA~1/MATLAB/R2024b/toolbox/shared/spc/src_ml/extern/include/DAHostLib_rtw.h
+
+C:/PROGRA~1/MATLAB/R2024b/toolbox/shared/spc/src_ml/extern/include/DAHostLib_Network.h:
+
+C:/PROGRA~1/MATLAB/R2024b/toolbox/shared/spc/src_ml/extern/include/DAHostLib_rtw.h:

@@ -7,9 +7,9 @@
  *
  * Code generation for model "flightControlSystem".
  *
- * Model version              : 9.25
+ * Model version              : 9.61
  * Simulink Coder version : 24.2 (R2024b) 21-Jun-2024
- * C source code generated on : Thu Nov  6 17:22:05 2025
+ * C source code generated on : Sun Nov 16 18:28:41 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -38,16 +38,8 @@
 extern uint8_T *imRGB;                 /* '<Root>/Image Data' */
 extern real32_T rt_powf_snf(real32_T u0, real32_T u1);
 extern real_T rt_roundd_snf(real_T u);
-extern real32_T rt_hypotf_snf(real32_T u0, real32_T u1);
-extern real32_T rt_roundf_snf(real32_T u);
-extern real_T rt_hypotd_snf(real_T u0, real_T u1);
-extern int32_T div_s32(int32_T numerator, int32_T denominator);
 extern void flightControlSystem_Geofencingerror(uint8_T *rty_Out1,
   P_Geofencingerror_flightControlSystem_T *localP);
-extern void flightControlSystem_SqrtUsedFcn_Init
-  (DW_SqrtUsedFcn_flightControlSystem_T *localDW);
-extern void flightControlSystem_SqrtUsedFcn(DW_SqrtUsedFcn_flightControlSystem_T
-  *localDW);
 extern void flightControlSystem_MeasurementUpdate_Init
   (B_MeasurementUpdate_flightControlSystem_T *localB,
    P_MeasurementUpdate_flightControlSystem_T *localP);
@@ -85,12 +77,10 @@ extern void flightControlSystem_ControlSystem_Init
    DW_ControlSystem_flightControlSystem_T *localDW,
    P_ControlSystem_flightControlSystem_T *localP);
 extern void flightControlSystem_ControlSystem_Start
-  (B_ControlSystem_flightControlSystem_T *localB,
-   DW_ControlSystem_flightControlSystem_T *localDW,
-   P_ControlSystem_flightControlSystem_T *localP);
+  (DW_ControlSystem_flightControlSystem_T *localDW);
 extern void flightControlSystem_ControlSystem(RT_MODEL_flightControlSystem_T *
   const flightControlSystem_M, const CommandBus *rtu_ReferenceValueServerCmds,
-  const SensorsBus *rtu_Sensors, const real_T rtu_VisionbasedData[5],
+  const SensorsBus *rtu_Sensors, const real_T rtu_VisionbasedData[6],
   B_ControlSystem_flightControlSystem_T *localB,
   DW_ControlSystem_flightControlSystem_T *localDW,
   P_ControlSystem_flightControlSystem_T *localP,

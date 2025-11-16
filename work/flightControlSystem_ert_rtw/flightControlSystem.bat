@@ -1,7 +1,7 @@
 
 cd .
 
-if "%1"=="" ("C:\PROGRA~1\MATLAB\R2024b\bin\win64\gmake"  -j9  -j9  -f flightControlSystem.mk all) else ("C:\PROGRA~1\MATLAB\R2024b\bin\win64\gmake"  -j9  -j9  -f flightControlSystem.mk %1)
+if "%1"=="" ("C:\PROGRA~1\MATLAB\R2024b\bin\win64\gmake"  -j9  -f flightControlSystem.mk all) else ("C:\PROGRA~1\MATLAB\R2024b\bin\win64\gmake"  -j9  -f flightControlSystem.mk %1)
 @if errorlevel 1 goto error_exit
 
 exit /B 0

@@ -7,9 +7,9 @@
  *
  * Code generation for model "flightControlSystem".
  *
- * Model version              : 9.25
+ * Model version              : 9.61
  * Simulink Coder version : 24.2 (R2024b) 21-Jun-2024
- * C source code generated on : Thu Nov  6 17:22:05 2025
+ * C source code generated on : Sun Nov 16 18:28:41 2025
  *
  * Target selection: ert.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -124,6 +124,23 @@ typedef struct {
 
 #endif
 
+#ifndef struct_tag_0mvjSDcKnb6Pv991yN8pBD
+#define struct_tag_0mvjSDcKnb6Pv991yN8pBD
+
+struct tag_0mvjSDcKnb6Pv991yN8pBD
+{
+  int32_T isInitialized;
+};
+
+#endif                                 /* struct_tag_0mvjSDcKnb6Pv991yN8pBD */
+
+#ifndef typedef_parrot_Grabber_flightControlSystem_T
+#define typedef_parrot_Grabber_flightControlSystem_T
+
+typedef struct tag_0mvjSDcKnb6Pv991yN8pBD parrot_Grabber_flightControlSystem_T;
+
+#endif                        /* typedef_parrot_Grabber_flightControlSystem_T */
+
 #ifndef struct_tag_5e8GnIx8R8RPYwO85WQu3D
 #define struct_tag_5e8GnIx8R8RPYwO85WQu3D
 
@@ -141,367 +158,6 @@ typedef struct tag_5e8GnIx8R8RPYwO85WQu3D
   parrot_ImageProcess_flightControlSystem_T;
 
 #endif                   /* typedef_parrot_ImageProcess_flightControlSystem_T */
-
-/* Custom Type definition for MATLAB Function: '<S2>/MATLAB Function' */
-#ifndef struct_tag_sOA5t73y81YtFHGIDxk0fKF
-#define struct_tag_sOA5t73y81YtFHGIDxk0fKF
-
-struct tag_sOA5t73y81YtFHGIDxk0fKF
-{
-  real_T WeightedCentroid[2];
-};
-
-#endif                                 /* struct_tag_sOA5t73y81YtFHGIDxk0fKF */
-
-#ifndef typedef_sOA5t73y81YtFHGIDxk0fKF_flightControlSystem_T
-#define typedef_sOA5t73y81YtFHGIDxk0fKF_flightControlSystem_T
-
-typedef struct tag_sOA5t73y81YtFHGIDxk0fKF
-  sOA5t73y81YtFHGIDxk0fKF_flightControlSystem_T;
-
-#endif               /* typedef_sOA5t73y81YtFHGIDxk0fKF_flightControlSystem_T */
-
-#ifndef struct_emxArray_real_T
-#define struct_emxArray_real_T
-
-struct emxArray_real_T
-{
-  real_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /* struct_emxArray_real_T */
-
-#ifndef typedef_emxArray_real_T_flightControlSystem_T
-#define typedef_emxArray_real_T_flightControlSystem_T
-
-typedef struct emxArray_real_T emxArray_real_T_flightControlSystem_T;
-
-#endif                       /* typedef_emxArray_real_T_flightControlSystem_T */
-
-#ifndef struct_emxArray_uint32_T
-#define struct_emxArray_uint32_T
-
-struct emxArray_uint32_T
-{
-  uint32_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /* struct_emxArray_uint32_T */
-
-#ifndef typedef_emxArray_uint32_T_flightControlSystem_T
-#define typedef_emxArray_uint32_T_flightControlSystem_T
-
-typedef struct emxArray_uint32_T emxArray_uint32_T_flightControlSystem_T;
-
-#endif                     /* typedef_emxArray_uint32_T_flightControlSystem_T */
-
-#ifndef struct_emxArray_int32_T
-#define struct_emxArray_int32_T
-
-struct emxArray_int32_T
-{
-  int32_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /* struct_emxArray_int32_T */
-
-#ifndef typedef_emxArray_int32_T_flightControlSystem_T
-#define typedef_emxArray_int32_T_flightControlSystem_T
-
-typedef struct emxArray_int32_T emxArray_int32_T_flightControlSystem_T;
-
-#endif                      /* typedef_emxArray_int32_T_flightControlSystem_T */
-
-#ifndef struct_emxArray_boolean_T
-#define struct_emxArray_boolean_T
-
-struct emxArray_boolean_T
-{
-  boolean_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /* struct_emxArray_boolean_T */
-
-#ifndef typedef_emxArray_boolean_T_flightControlSystem_T
-#define typedef_emxArray_boolean_T_flightControlSystem_T
-
-typedef struct emxArray_boolean_T emxArray_boolean_T_flightControlSystem_T;
-
-#endif                    /* typedef_emxArray_boolean_T_flightControlSystem_T */
-
-#ifndef struct_emxArray_real32_T
-#define struct_emxArray_real32_T
-
-struct emxArray_real32_T
-{
-  real32_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /* struct_emxArray_real32_T */
-
-#ifndef typedef_emxArray_real32_T_flightControlSystem_T
-#define typedef_emxArray_real32_T_flightControlSystem_T
-
-typedef struct emxArray_real32_T emxArray_real32_T_flightControlSystem_T;
-
-#endif                     /* typedef_emxArray_real32_T_flightControlSystem_T */
-
-#ifndef typedef_emxArray_creal_T_flightControlSystem_T
-#define typedef_emxArray_creal_T_flightControlSystem_T
-
-typedef struct {
-  creal_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-} emxArray_creal_T_flightControlSystem_T;
-
-#endif                      /* typedef_emxArray_creal_T_flightControlSystem_T */
-
-#ifndef struct_emxArray_tag_sOA5t73y81YtFHGIDx
-#define struct_emxArray_tag_sOA5t73y81YtFHGIDx
-
-struct emxArray_tag_sOA5t73y81YtFHGIDx
-{
-  sOA5t73y81YtFHGIDxk0fKF_flightControlSystem_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                              /* struct_emxArray_tag_sOA5t73y81YtFHGIDx */
-
-#ifndef typedef_emxArray_sOA5t73y81YtFHGIDxk0fK_flightControlSystem_T
-#define typedef_emxArray_sOA5t73y81YtFHGIDxk0fK_flightControlSystem_T
-
-typedef struct emxArray_tag_sOA5t73y81YtFHGIDx
-  emxArray_sOA5t73y81YtFHGIDxk0fK_flightControlSystem_T;
-
-#endif       /* typedef_emxArray_sOA5t73y81YtFHGIDxk0fK_flightControlSystem_T */
-
-#ifndef struct_tag_Xor1beQa71R3Egpz66x3XD
-#define struct_tag_Xor1beQa71R3Egpz66x3XD
-
-struct tag_Xor1beQa71R3Egpz66x3XD
-{
-  emxArray_real_T_flightControlSystem_T *f1;
-};
-
-#endif                                 /* struct_tag_Xor1beQa71R3Egpz66x3XD */
-
-#ifndef typedef_cell_wrap_36_flightControlSystem_T
-#define typedef_cell_wrap_36_flightControlSystem_T
-
-typedef struct tag_Xor1beQa71R3Egpz66x3XD cell_wrap_36_flightControlSystem_T;
-
-#endif                          /* typedef_cell_wrap_36_flightControlSystem_T */
-
-#ifndef struct_emxArray_tag_Xor1beQa71R3Egpz66
-#define struct_emxArray_tag_Xor1beQa71R3Egpz66
-
-struct emxArray_tag_Xor1beQa71R3Egpz66
-{
-  cell_wrap_36_flightControlSystem_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                              /* struct_emxArray_tag_Xor1beQa71R3Egpz66 */
-
-#ifndef typedef_emxArray_cell_wrap_36_flightControlSystem_T
-#define typedef_emxArray_cell_wrap_36_flightControlSystem_T
-
-typedef struct emxArray_tag_Xor1beQa71R3Egpz66
-  emxArray_cell_wrap_36_flightControlSystem_T;
-
-#endif                 /* typedef_emxArray_cell_wrap_36_flightControlSystem_T */
-
-#ifndef struct_emxArray_int16_T
-#define struct_emxArray_int16_T
-
-struct emxArray_int16_T
-{
-  int16_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /* struct_emxArray_int16_T */
-
-#ifndef typedef_emxArray_int16_T_flightControlSystem_T
-#define typedef_emxArray_int16_T_flightControlSystem_T
-
-typedef struct emxArray_int16_T emxArray_int16_T_flightControlSystem_T;
-
-#endif                      /* typedef_emxArray_int16_T_flightControlSystem_T */
-
-#ifndef struct_emxArray_int8_T
-#define struct_emxArray_int8_T
-
-struct emxArray_int8_T
-{
-  int8_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /* struct_emxArray_int8_T */
-
-#ifndef typedef_emxArray_int8_T_flightControlSystem_T
-#define typedef_emxArray_int8_T_flightControlSystem_T
-
-typedef struct emxArray_int8_T emxArray_int8_T_flightControlSystem_T;
-
-#endif                       /* typedef_emxArray_int8_T_flightControlSystem_T */
-
-#ifndef struct_emxArray_uint8_T
-#define struct_emxArray_uint8_T
-
-struct emxArray_uint8_T
-{
-  uint8_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /* struct_emxArray_uint8_T */
-
-#ifndef typedef_emxArray_uint8_T_flightControlSystem_T
-#define typedef_emxArray_uint8_T_flightControlSystem_T
-
-typedef struct emxArray_uint8_T emxArray_uint8_T_flightControlSystem_T;
-
-#endif                      /* typedef_emxArray_uint8_T_flightControlSystem_T */
-
-#ifndef struct_emxArray_boolean_T_0x0
-#define struct_emxArray_boolean_T_0x0
-
-struct emxArray_boolean_T_0x0
-{
-  int32_T size[2];
-};
-
-#endif                                 /* struct_emxArray_boolean_T_0x0 */
-
-#ifndef typedef_emxArray_boolean_T_0x0_flightControlSystem_T
-#define typedef_emxArray_boolean_T_0x0_flightControlSystem_T
-
-typedef struct emxArray_boolean_T_0x0
-  emxArray_boolean_T_0x0_flightControlSystem_T;
-
-#endif                /* typedef_emxArray_boolean_T_0x0_flightControlSystem_T */
-
-#ifndef struct_emxArray_real_T_1x0
-#define struct_emxArray_real_T_1x0
-
-struct emxArray_real_T_1x0
-{
-  int32_T size[2];
-};
-
-#endif                                 /* struct_emxArray_real_T_1x0 */
-
-#ifndef typedef_emxArray_real_T_1x0_flightControlSystem_T
-#define typedef_emxArray_real_T_1x0_flightControlSystem_T
-
-typedef struct emxArray_real_T_1x0 emxArray_real_T_1x0_flightControlSystem_T;
-
-#endif                   /* typedef_emxArray_real_T_1x0_flightControlSystem_T */
-
-/* Custom Type definition for MATLAB Function: '<S2>/MATLAB Function' */
-#ifndef struct_tag_R6Og1x0kmqQXSF9Pwa49FD
-#define struct_tag_R6Og1x0kmqQXSF9Pwa49FD
-
-struct tag_R6Og1x0kmqQXSF9Pwa49FD
-{
-  real_T Area;
-  real_T Centroid[2];
-  real_T BoundingBox[4];
-  real_T MajorAxisLength;
-  real_T MinorAxisLength;
-  real_T Eccentricity;
-  real_T Orientation;
-  emxArray_boolean_T_0x0_flightControlSystem_T Image;
-  emxArray_boolean_T_0x0_flightControlSystem_T FilledImage;
-  real_T FilledArea;
-  real_T EulerNumber;
-  real_T Extrema[16];
-  real_T EquivDiameter;
-  real_T Extent;
-  emxArray_real_T_flightControlSystem_T *PixelIdxList;
-  emxArray_real_T_flightControlSystem_T *PixelList;
-  real_T Perimeter;
-  real_T Circularity;
-  emxArray_real_T_flightControlSystem_T *PixelValues;
-  real_T WeightedCentroid[2];
-  real_T MeanIntensity;
-  real_T MinIntensity;
-  real_T MaxIntensity;
-  emxArray_real_T_1x0_flightControlSystem_T SubarrayIdx;
-  real_T SubarrayIdxLengths[2];
-};
-
-#endif                                 /* struct_tag_R6Og1x0kmqQXSF9Pwa49FD */
-
-#ifndef typedef_s_R6Og1x0kmqQXSF9Pwa49FD_flightControlSystem_T
-#define typedef_s_R6Og1x0kmqQXSF9Pwa49FD_flightControlSystem_T
-
-typedef struct tag_R6Og1x0kmqQXSF9Pwa49FD
-  s_R6Og1x0kmqQXSF9Pwa49FD_flightControlSystem_T;
-
-#endif              /* typedef_s_R6Og1x0kmqQXSF9Pwa49FD_flightControlSystem_T */
-
-#ifndef struct_emxArray_tag_R6Og1x0kmqQXSF9Pwa
-#define struct_emxArray_tag_R6Og1x0kmqQXSF9Pwa
-
-struct emxArray_tag_R6Og1x0kmqQXSF9Pwa
-{
-  s_R6Og1x0kmqQXSF9Pwa49FD_flightControlSystem_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                              /* struct_emxArray_tag_R6Og1x0kmqQXSF9Pwa */
-
-#ifndef typedef_emxArray_s_R6Og1x0kmqQXSF9Pwa49_flightControlSystem_T
-#define typedef_emxArray_s_R6Og1x0kmqQXSF9Pwa49_flightControlSystem_T
-
-typedef struct emxArray_tag_R6Og1x0kmqQXSF9Pwa
-  emxArray_s_R6Og1x0kmqQXSF9Pwa49_flightControlSystem_T;
-
-#endif       /* typedef_emxArray_s_R6Og1x0kmqQXSF9Pwa49_flightControlSystem_T */
 
 /* Parameters for system: '<S4>/Geofencing error' */
 typedef struct P_Geofencingerror_flightControlSystem_T_
