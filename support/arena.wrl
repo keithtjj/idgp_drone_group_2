@@ -1067,7 +1067,7 @@ Transform {
   }
 }
 DEF LandingSpot Transform {
-  translation 2.901576 -0.02 0.8823494
+  translation 0.9552463 -0.02 3.047101
   rotation 0 0 0 0
   children Shape {
     appearance Appearance {
@@ -1092,25 +1092,15 @@ DEF Lines Transform {
     geometry IndexedFaceSet {
       solid FALSE
       coordIndex [
-        0, 1, 2, 3, -1, 
-        4, 5, 6, 7, -1, 
-        8, 9, 10, 11, -1 
+        0, 1, 2, 3, -1 
       ]
       convex FALSE
       coord Coordinate {
         point [
-          0.7351662 -0.02 -0.5606138,
-          0.8547278 -0.02 -1.644498,
-          0.9541249 -0.02 -1.633533,
-          0.8345633 -0.02 -0.5496494,
-          0.8282339 -0.02 -1.589556,
-          1.351672 -0.02 -2.109467,
-          1.422143 -0.02 -2.038517,
-          0.8987051 -0.02 -1.518607,
-          1.331387 -0.02 -1.970947,
-          0.9578313 -0.02 -2.658055,
-          1.045687 -0.02 -2.705819,
-          1.419243 -0.02 -2.018711 
+          2.997102 -0.02 -0.4853319,
+          2.997102 -0.02 -0.7052463,
+          3.097101 -0.02 -0.7052463,
+          3.097101 -0.02 -0.4853319 
         ]
       }
     }
@@ -1421,8 +1411,56 @@ DEF Static_Objects Transform {
     }
   ]
 }
+DEF LinePattern Transform {
+  translation 2 0.002 -2
+  #  
+  rotation 1 0 0 0
+  children Shape {
+    appearance Appearance {
+      textureTransform TextureTransform {
+        #  
+        scale 1 5.95
+      }
+      texture ImageTexture {
+        url "Line_Pattern.png" 
+      }
+    }
+    geometry IndexedFaceSet {
+      texCoordIndex [
+        0, 1, 2, 3 
+      ]
+      solid FALSE
+      coordIndex [
+        0, 1, 2, 3, -1 
+      ]
+      texCoord TextureCoordinate {
+        # 左下 
+        # 右下 
+        # 右上 
+        # 左上 
+        point [
+          0 0,
+          6 0,
+          6 1,
+          0 1 
+        ]
+      }
+      coord Coordinate {
+        # 宽度改为6米，匹配6:1比例 
+        #  
+        # 高度 
+        point [
+          -1.92 0 2.5,
+          2 0 2.5,
+          2 0 3.16,
+          -1.92 0 3.16 
+        ]
+      }
+    }
+  }
+}
 DEF QuadBody Transform {
-  translation 0.6048301 0.001765 0.7903469
+  translation 0.5353319 0.001765 3.047101
   scaleOrientation 0 1 0 0
   children [
     DEF UAV_Collision Transform {
@@ -1490,12 +1528,12 @@ DEF QuadBody Transform {
 }
 DEF IsoNoRotation Viewpoint {
   description "Isometric - No Rotation"
-  position 1.50573 0.670765 1.780347
+  position 1.436232 0.670765 4.037101
   orientation -0.46727 0.858698 0.210466 0.847752
 }
 DEF OnQuadNoRotation Viewpoint {
   description "Chase - No Rotation"
-  position -2.39517 1.001765 0.7903469
+  position -2.464668 1.001765 3.047101
   orientation 0 -1 -0 1.57
 }
 DEF BlueMarker Transform {
